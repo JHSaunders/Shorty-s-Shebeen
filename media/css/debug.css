@@ -1,0 +1,35 @@
+.menu-item-selected
+{
+    background-color: red;
+}
+
+.expand-button
+{
+    width:18px;
+    height:18px;
+
+    background-position:center center;
+    background-repeat: no-repeat;
+    display:inline;    
+}
+
+li.menu-item-expanded .expand-button
+{
+
+    background-image:url(/media/img/expand.png);
+}
+
+li.menu-item-contracted .expand-button 
+{
+    background-image:url(/media/img/contract.png);
+}
+
+li.menu-item-contracted ul
+{
+   display:none;
+}
+
+div.hidden
+{
+    display:none;
+}

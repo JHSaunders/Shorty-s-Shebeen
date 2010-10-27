@@ -1,0 +1,10 @@
+Django==1.2.3
+Markdown==2.0.3
+django-popularity==0.2
+django-ratings==0.3.4
+django-registration==0.7
+html5lib==0.90
+pisa==3.0.33
+reportlab==2.5
+simplejson==2.1.1
+wsgiref==0.1.2

@@ -1,0 +1,29 @@
+from django import template
+from django.utils.encoding import smart_unicode
+#from lib.utils import string_to_list, string_to_dict, get_query_string
+from django.utils.safestring import mark_safe
+
+register = template.Library()
+
+@register.inclusion_tag('_response.html', takes_context=True)
+def query_string(context, add=None, remove=None):
+    """
+    Allows the addition and removal of query string parameters.
+    
+    _response.html is just {{ response }}
+
+    Usage:
+    http://www.url.com/{% query_string "param_to_add=value, param_to_add=value" "param_to_remove, params_to_remove" %}
+    http://www.url.com/{% query_string "" "filter" %}filter={{new_filter}}
+    http://www.url.com/{% query_string "sort=value" "sort" %}
+    """
+    # Written as an inclusion tag to simplify getting the context.
+    add = string_to_dict(add,context)
+    remove = string_to_list(remove)
+    params = dict( context['request'].GET.items())
+    response = get_query_string(params, add, remove)
+    return {'response': response }
+    
+# lib/utils.py
+
+

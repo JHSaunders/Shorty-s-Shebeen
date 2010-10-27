@@ -1,0 +1,40 @@
+{% load comments i18n %}
+
+<form action="{% comment_form_target %}" method="post">{% csrf_token %}
+  {% if next %}<input type="hidden" name="next" value="{{ next }}" />{% endif %}
+  {% for field in form %}
+    {% if field.is_hidden %}
+      {{ field }}
+    {% endif %}  
+  {% endfor %}  
+  <table>
+    {% if not user.is_authenticated %}      
+      <tr>
+        <td>{{ form.name.label_tag }}</td>
+        <td>{% if form.name.errors %}<div class="error">{{ form.name.errors }}</div>{% endif %}{{ form.name }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.email.label_tag }}</td>
+        <td>{% if form.email.errors %}<div class="error">{{ form.email.errors }}</div>{% endif %}{{ form.email }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.url.label_tag }}</td>
+        <td>{% if form.url.errors %}<div class="error">{{ form.url.errors }}</div>{% endif %}{{ form.url }}</td>
+      </tr>    
+    {% endif %}
+      <tr>
+        <td>{{ form.comment.label_tag }}</td>
+        <td>{% if form.comment.errors %}<div class="error">{{ form.comment.errors }}</div>{% endif %}{{ form.comment }}</td>
+      </tr>
+      
+      <tr style="display:none;">
+        <td>{{ form.honeypot.label_tag }}</td>
+        <td>{% if form.honeypot.errors %}<div class="error">{{ form.honeypot.errors }}</div>{% endif %}{{ form.honeypot }}</td>
+      </tr>
+  </table>
+  
+  <p class="submit">
+    <input type="submit" name="preview" class="submit-preview" value="{% trans "Preview" %}" />
+    <input type="submit" name="post" class="submit-post" value="{% trans "Post" %}" />
+  </p>
+</form>

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Edit Profile</h1>
+
+<form method="POST" action="{% url edit_profile %}">{% csrf_token %}
+<fieldset>
+<table>
+{{auth_details_form}}
+<tr>
+<th><label>Password:</label></th>
+<td><a href = "{%url auth_password_change %}">change password</a></td>
+</tr>
+<tr>
+<th><label>Connect your facebook profile:</label></th>
+<td></td>
+</tr>
+</table>
+</fieldset>
+<fieldset>
+<table>
+{{profile_form}}
+</table>
+</fieldset>
+<input type="submit" value="Submit" />
+</form>
+{% endblock %}

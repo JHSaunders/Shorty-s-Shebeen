@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% load comments %}
+{% load rating_tags %}
+{% load markup %}
+
+{% block content %}
+<h1>{{object.title}}</h1>
+<p class="byline">by <a href="{% url view_author object.author.id%}">{{object.author}}</a></p>
+<p>{{object.genres}}</p>
+
+<div id="story-preview">
+{{object.preview|markdown}}
+
+<script type="text/javascript">
+
+function show_story()
+{
+    $('#story-preview').addClass('hidden')   
+    $('#story-text').removeClass('hidden')
+}
+
+function hide_story()
+{
+    $('#story-preview').removeClass('hidden')   
+    $('#story-text').addClass('hidden')
+}
+
+$(function(){
+    $('#btn-show-story').click(show_story)
+    $('#btn-hide-story').click(hide_story)
+    })
+
+</script>
+
+<div id="story-preview">
+<img id="btn-show-story" src="/media/img/expand.png" alt="Show Story"/>
+</div>
+</div>
+
+<div id="story-text" class="hidden">
+{{object.text|markdown}}
+<div>
+<img id="btn-hide-story" src="/media/img/contract.png" alt="Hide Story"/>
+</div>
+</div>
+
+
+
+<a href="{% url download_story object.id%}">Download pdf</a>
+{% ifequal user object.author %}
+<a href="{% url edit_story object.id %}">Edit</a>
+{% endifequal %}
+<a href="http://www.addthis.com/bookmark.php" 
+      class="addthis_button"
+      addthis:url="http://example.com"
+      addthis:title="An Example Title"
+      addthis:description="An Example Description"></a>
+<h3>Rating</h3>
+<table>
+<tr>
+<td>Overall Rating:</td>
+<td>{% rating_star_form 5 story_rating "star" True %}</td>
+<tr>
+<td>Your Rating:</td>
+<td>{% rating_star_form 5 user_rating "your-rating" False %}</td>
+</tr>
+</table>
+
+<script type="text/javascript">
+$(function(){
+    $('input.your-rating').rating({
+        callback: function(value, link){
+            $.ajax({type:"GET",
+                url:"{% url rate_story object.id %}",
+                data:"rating="+value,
+                success:function(){}
+                })
+        }
+     });
+});    
+</script>
+
+<h3>Comments</h3>
+{% render_comment_list for object %}
+<h3>Post a new comment</h3>
+{% render_comment_form for object %}
+{% endblock %}

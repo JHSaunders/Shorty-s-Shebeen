@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% load markup %}
+
+{% block content %}
+{% if account %}
+Activation worked, welcome {{account}}
+{%else%}
+Activation failed
+{%endif%}
+{% endblock %}

@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% load archive_tags %}
+{% load markup %}
+
+{%block scripts%}
+{{ block.super }}
+<script type="text/javascript">
+
+$(document).ready(
+function()
+{
+    $('.expand-button').click(
+    function()
+    {        
+
+        if($(this).parent().hasClass('menu-item-contracted'))
+        {
+            $(this).parent().removeClass('menu-item-contracted').addClass('menu-item-expanded');
+        }
+        else
+        {   
+            $(this).parent().removeClass('menu-item-expanded').addClass('menu-item-contracted');
+        }
+    }
+    );
+}
+);
+
+</script>
+{%endblock%}
+    
+{% block content %}
+
+<h1>Story Archive</h1>
+<div>
+
+    <h3>Genre</h3>
+    <ul class="filter-menu">
+        <li>
+            <a href="{%url story_archive%}{% query_string '' 'genre,page'%}"
+            {%if not genre%}class="menu-item-selected"{%endif%}>All Genres</a>
+        </li>
+    {%for dgenre in genres%}
+        <li>
+            <a href="{%url story_archive%}{% query_string 'genre=dgenre' 'page'%}"
+            {%ifequal genre dgenre.name %}class="menu-item-selected"{%endifequal%}>{{dgenre}}</a>
+        </li>
+    {%endfor%}
+    </ul>
+
+    <h3>Publication Date</h3>
+    <ul class="filter-menu">
+    <li>
+        <a href="{% url story_archive%}{% query_string '' 'year,month,page'%}"  
+        {%if not year%}class="menu-item-selected"{%endif%}>
+            All Dates
+        </a>
+    </li>
+    {% for dyear, months in dates.items %}
+    <li {%ifnotequal year dyear %}class="menu-item-contracted"{%else%}class="menu-item-expanded"{%endifnotequal%}> 
+        <a href="{% url story_archive%}{% query_string 'year=dyear' 'year,month,page'%}" 
+        {%ifequal year dyear %}class="menu-item-selected"{%endifequal%}>
+            {{dyear}}</a>
+        <img class="expand-button"/>
+        <ul>
+        {% for dmonth in months%}
+            <li>
+            <a href="{% url story_archive%}{% query_string 'year=dyear,month=dmonth.month' 'year,month,page'%}" 
+            {%ifequal year dyear %}{%ifequal month dmonth.month %}class="menu-item-selected"{%endifequal%}{%endifequal%}>
+            {{dmonth|date:"F"}}</a>
+            </li>
+        {% endfor %}
+        </ul>
+        </li>    
+    {% endfor %}
+    </ul>
+
+    <h3>Search:</h3>
+    <form action = "{% url story_archive%}" method="GET">
+        <input type="text" name="search" value="{{request.GET.search}}"/>
+        <input type="submit" name="submit" value="Search">
+        <a href="{% url story_archive%}{% query_string '' 'search,submit,page'%}">Clear Search</a>
+        {% query_string_as_hiddens '' 'search,page,submit'%}
+    </form>
+    
+    <h3>Order by:</h3>
+    <ul class="filter-menu">
+    
+    <li><a href="{% url story_archive%}{% query_string 'order=order_date' ''%}" {%ifequal order "order_date" %}class="menu-item-selected"{%endifequal%}>Date </a></li>
+    <li><a href="{% url story_archive%}{% query_string 'order=order_rating' '' %}" {%ifequal order "order_rating" %}class="menu-item-selected"{%endifequal%}>Rating</a></li>
+    </ul>
+</div>
+<div>
+<h2>Results</h2>
+
+{% include "stories/story_list.html" %}
+
+{% endblock %}
+</div>

@@ -1,0 +1,14 @@
+Hello,
+
+Your Shorty's Shebeen account has been created, your username is 
+
+Please visit this url to activate your account:
+
+  http://www.shortys.co.za{% url registration_activate activation_key %}
+
+regards,
+
+Shorty.
+
+http://www.shortys.co.za
+
