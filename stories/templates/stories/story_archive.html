@@ -28,10 +28,13 @@ function()
 
 </script>
 {%endblock%}
-    
-{% block content %}
 
-<h1>Story Archive</h1>
+{% block bodytitle%}
+Archive
+{%endblock%}
+
+{%block sidebar%}
+<h1 class="title">Filter</h1>
 <div>
 
     <h3>Genre</h3>
@@ -90,10 +93,9 @@ function()
     <li><a href="{% url story_archive%}{% query_string 'order=order_rating' '' %}" {%ifequal order "order_rating" %}class="menu-item-selected"{%endifequal%}>Rating</a></li>
     </ul>
 </div>
-<div>
-<h2>Results</h2>
+{% endblock %}
 
+{% block content %}
 {% include "stories/story_list.html" %}
-
 {% endblock %}
 </div>

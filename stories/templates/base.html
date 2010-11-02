@@ -7,6 +7,7 @@
 {% block head %}
 <head>
     {%block style%}
+    <link rel="stylesheet" href="/media/css/style.css"/>   
     <link rel="stylesheet" href="/media/css/debug.css"/>   
     <link rel="stylesheet" href="/media/css/jquery.rating.css"/>
     {%endblock%}
@@ -15,15 +16,16 @@
     <script type="text/javascript" src="/media/js/jquery.js"></script> 
     <script type="text/javascript" src="/media/js/jquery.MetaData.js"></script>
     <script type="text/javascript" src="/media/js/jquery.rating.js"></script>
-    <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js"></script>
     {%endblock%}
-    <title>Shorty's Shebeen - {%block pagetitle %}South African Short Stories{% endblock %}</title>
+    <title>{%block pagetitle %}Shorty's Shebeen - South African Short Stories{% endblock %}</title>
 </head>
 {% endblock %}
 <body>
+<div id="wrapper">
 {% block body %}
-<h1>Shorty's Shebeen</h1>
-<div>
+<div id="header"></div>
+
+<div id="menu">
 
 <a href="{% url home %}">Home</a>
 <a href="{% url about %}">About</a>
@@ -32,7 +34,7 @@
 
 <form action = "{% url search %}" method="GET" id="search-form" style="display:inline;">
 <input type="text" name="search"/>
-<input type="submit" name="submit" value="Search"> 
+<input type="submit" name="submit" value="Search"/> 
 </form>
 
 <span class="user-info">
@@ -45,15 +47,35 @@
 <a href="{% url author_dashboard %}">Dashboard</a>
 <a href="{% url auth_logout %}">Logout</a>
 </span>
-
 {% endif %}
 </div>
 
-<div id="content-frame">    
+<h1 id="bodytitle">
+{% block bodytitle%}
+
+{% endblock %}  
+</h1>
+
+{%if sidebar%}
+<div id="sidebar" class="story">
+{% block sidebar%}
+{% endblock%}
+</div>
+{%endif%}
+
+<div id="content" 
+{%if sidebar%}class="content-with-sidebar" {%endif%}>
+
     {% block content %}
     
     {% endblock %}
 </div>
+
+<div id="footer">
+Copyright (c) 2010 Shorty's ~ All stories are the property of their authors
+</div>
+
 {% endblock %}
+</div>
 </body>
 </html>

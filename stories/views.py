@@ -97,6 +97,7 @@ def story_archive(req):
     order=req.GET.get("order","order_date")
     
     context = {}
+    context["sidebar"]=True
     context["search"] = search
     context["author"] = author
     context["genre"] = genre
@@ -151,7 +152,7 @@ def view_author(req,author_id):
         qs = Story.objects.all()
     else:
         qs = Story.published_stories.all()
-
+    qs = qs.filter(author__id=author_id)
     return object_list(req,qs,template_name="stories/view_author.html", paginate_by=10, template_object_name="story", extra_context={"author":User.objects.get(id=author_id)})
     
 def about(req):
