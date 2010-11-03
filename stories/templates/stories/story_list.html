@@ -3,24 +3,8 @@
 {% load rating_tags %}
 
 {% for story in story_list %}
-<div class="story">
-<h2 class="title" ><a  href="{% url read_story story.id %}">{{story.title}}</a></h2>
-<h4 class="author"> by <a href="{% url view_author story.author.id %}">{{story.author}}</a></h4>
-
-<div>
-
-<table><tr>
-<td>{{story.genres}}</td>
-<td>|{{story.date_published}}|</td>
-<td>{% rating_star_form 5 story.rating.get_rating "star" True %}</td> 
-{%ifequal story.author user%}<td>|<a href="{% url edit_story story.id%}">Edit</a></td>{%endifequal%} 
-</tr></table>
-
-</div>
-<div>{{story.preview|markdown}}</div>
-</div>
+{% include "stories/story_preview.html" %}
 {% endfor %}
-
 
 {% if is_paginated %}
     {% if page_obj.has_previous %}

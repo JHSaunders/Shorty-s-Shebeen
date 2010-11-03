@@ -1,4 +1,3 @@
-
 # Django settings for shortys_shebeen project.
 import os
 import sys
