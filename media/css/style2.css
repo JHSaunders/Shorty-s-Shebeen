@@ -1,0 +1,265 @@
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #1E1E1E;
+	background-image: url(/media/img/curtain.jpg);
+	background-repeat:no-repeat;
+	background-position:center top;
+	background-color: #000;
+	border: thin none #000;
+}
+ 
+h1, h2, h3, h4 {
+	margin: 0;
+	padding: 0;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-weight: normal;
+	color: #534616;
+}
+ 
+h1 {
+	font-size: 2em;
+}
+ 
+h2 {
+	font-size: 1.8em;
+}
+ 
+h3 {
+	font-size: 1.6em;
+}
+ 
+h4 {
+	font-size: 1em;
+}
+ 
+p, ul, ol {
+	margin-top: 0;
+	line-height: 110%;
+}
+ 
+ul, ol {
+}
+ 
+a {
+	text-decoration: none;
+	color: #3B9008;
+}
+ 
+a:hover {
+}
+ 
+#wrapper {
+	width: 960px;
+	margin: 0 auto;
+	padding: 0;
+}
+ 
+/* Header */
+ 
+#header {
+	width: 960px;
+	height: 250px;
+	margin: 0 auto;
+}
+ 
+/* Menu */
+ 
+#menu {
+	height: 38;
+	margin: 0 auto;
+	padding: 0;
+	background: #1E1E1E;
+	background-image: url(/media/img/greyback.png);
+}
+ 
+ 
+/* Page structure */
+
+#page {
+	width: 960px;
+	margin: 0px;
+	padding: 0px;
+}
+
+#content {
+	margin: 2px;
+	padding: 2px;
+}
+
+.content-with-sidebar
+{
+    width: 740px;
+}
+
+#sidebar
+{
+    float:right;
+    max-width:200px;
+}
+
+#left {
+	padding: 0px;
+	width: 378px;
+	float:left;
+	margin-top: 0px;
+	margin-right: 2px;
+	margin-bottom: 2px;
+	margin-left: 0px;
+}
+
+#middle {
+	padding: 0px;
+	width: 378px;
+	float:left;
+	margin-top: 0px;
+	margin-right: 2px;
+	margin-bottom: 2px;
+	margin-left: 0px;
+}
+/* Section Headers */
+.section {
+	background: #1E1E1E url(/media/img/greenback.png) repeat left top;
+	padding: 5px;
+	margin: 5px;
+	-moz-border-radius:8px;
+	-webkit-border-radius:8px;
+	-opera-border-radius:8px;
+	-khtml-border-radius:8px;
+	border-radius:8px;
+	box-shadow:0px 0px 20px #000;
+-webkit-box-shadow:0px 0px 20px #0B3B0B;
+-moz-box-shadow: 0px 0px 4px #04B404; 
+}
+
+ .section .name {
+		letter-spacing: -0.5px;
+	color: #3BA20E; text-shadow:0px 0px 30px #000000;
+	padding-top: 0px;
+	padding-right: 0;
+	padding-bottom: 0;
+	padding-left: 10px;
+	
+}
+ 
+.section .name a {
+	border: none;
+	color: #3BA20E;
+}
+
+
+/* Story List */
+
+.story {
+	background-color: #F6E3CE;
+	padding: 4px;
+	-moz-border-radius:8px;
+	-webkit-border-radius:8px;
+	-opera-border-radius:8px;
+	-khtml-border-radius:8px;
+	border-radius:8px;
+	margin-top: 10px;
+	margin-right: 5px;
+	margin-bottom: 10px;
+	margin-left: 5px;
+	box-shadow:0px 0px 20px #000;
+	-webkit-box-shadow:0px 0px 20px #0B3B0B;
+	-moz-box-shadow: 0px 0px 4px #B45F04;
+}
+ 
+
+
+.story .title {
+	
+	letter-spacing: -0.5px;
+	background: #840403 url(/media/img/redback.jpg) repeat left top;
+	background-color: #840403;
+	color: #DF7401;
+	color: #3BA20E; text-shadow:0px 0px 20px #000000;
+	padding-top: 5px;
+	padding-right: 0;
+	padding-bottom: 5px;
+	padding-left: 10px;
+	-moz-border-radius:8px;
+	-webkit-border-radius:8px;
+	-opera-border-radius:8px;
+	-khtml-border-radius:8px;
+	border-radius:8px;
+	box-shadow:0px 0px 20px #000;
+-webkit-box-shadow:0px 0px 20px #0B3B0B;
+-moz-box-shadow: 0px 0px 20px #B45F04;
+}
+ 
+.story .title a {
+	border: none;
+	color: #DF7401;
+}
+
+.story .author {
+	background-image: none;
+	letter-spacing: -0.5px;
+	color: #0B610B;
+	padding-top: 5px;
+	padding-right: 0;
+	padding-bottom: 5px;
+	padding-left: 10px;
+	height:auto;
+}
+ 
+.story .author a {
+	border: none;
+	color: #0B610B;
+}
+
+.story p {
+	padding-left: 10px;
+}
+
+.story .meta {
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 10px;
+	text-align: left;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-style: italic;
+	color: #000;	
+}
+.story .meta a {
+	color: .story .meta {
+	}
+.links {
+	display: block;
+	width: 100px;
+	height: 20px;
+	margin-top: 10px;
+	text-align: center;
+	text-transform: uppercase;
+	font-size: 10px;
+	font-weight:  bold;
+}
+ 
+/* Footer */
+ 
+#footer {
+	height: 64px;
+	margin: 0 auto;
+	padding: 0px 0 15px 0;
+	font-family: Arial, Helvetica, sans-serif;
+
+	padding-top: 26px;
+	line-height: normal;
+	font-size: 12px;
+	text-align: center;
+	color: #898989;
+	clear:left;
+}
+ 
+#footer a {
+	font-weight: bold;
+	color: #898989;
+}
+
