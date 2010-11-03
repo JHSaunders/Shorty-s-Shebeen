@@ -1,20 +1,38 @@
 {% load markup %}
 {% load rating_tags %}
+{% load comments %}
 
 <div class="story">
 <h2 class="title" ><a  href="{% url read_story story.id %}">{{story.title}}</a></h2>
 <h4 class="author"> by <a href="{% url view_author story.author.id %}">{{story.author}}</a></h4>
 <div>
 
-<table><tr>
-<td>{{story.genres}}</td>
-<td>|{{story.date_published}}|</td>
-<td>{% rating_star_form 5 story.rating.get_rating "star" True %}</td> 
-{%ifequal story.author user%}
-<td>|<a href="{% url edit_story story.id%}">Edit</a></td>
-{%endifequal%} 
-</tr></table>
+</div>
+<div>
+
+{%if do_short_preview %}
+{{story.short_preview|markdown}}
+{%else%}
+{{story.preview|markdown}}
+{%endif%}
 
 </div>
-<div>{{story.preview|markdown}}</div>
+
+{% get_comment_count for story as comment_count  %}
+
+<div class="meta">
+<p>{% rating_star_form 5 story.rating.get_rating "star" True %}</p>
+<p>&nbsp;</p>
+
+<p>{{story.genres}}<br/>{{story.date_published}} ({{comment_count}}&nbsp;comments)
+
+{%ifequal story.author user%}
+<a href="{% url edit_story story.id%}">Edit</a>
+{%endifequal%} 
+</p>
+
 </div>
+
+</div>
+
+

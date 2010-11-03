@@ -2,6 +2,7 @@ from django import template
 from django.utils.safestring import mark_safe
 import datetime
 import cgi
+import random
 
 register = template.Library()
 
@@ -35,16 +36,17 @@ class RatingStarNode(template.Node):
         except:
             checked =int(self.checked)
         
-        s='<form>\n'
+        s='\n'
+        random_name=random.randint(1,1000)
         for n in range(1,number+1):
-            s+='<input type="radio" class="%s" value="%s" '%(self.classes,n)
+            s+='<input name ="stars%s" type="radio" class="%s" value="%s" '%(random_name,self.classes,n)
             
             if self.disabled==True:
                 s+='disabled="disabled" '
             if n ==checked:
                 s+='checked="checked" '
             s+='/>\n'                   
-        s+='</form>'
+        s+=''
         
         return mark_safe(s)
         

@@ -23,8 +23,21 @@ from forms import *
 def test(req):
     return HttpResponse("Hello world")
 
-def home(req):
-    return direct_to_template(req,"stories/home.html",{})
+def home(req):    
+    context = {}
+
+    num_stories = 10
+    context["latest"] = Story.published_stories.order_by('-date_published')[:num_stories]    
+    context["top_rated"] = Story.published_stories.extra(select={'rating_scorex': 
+            '((100/%s*rating_score/(rating_votes+%s))+100)/2' % 
+            (Story.rating.range, Story.rating.weight)}).order_by('-rating_scorex')
+    
+    context["random_story"] = Story.published_stories.order_by('?')[0]
+    context["winner_story"] = Story.published_stories.all()[0]
+    
+    context["shortys_story"] = Story.published_stories.order_by('?')[0] 
+    
+    return direct_to_template(req,"stories/home.html",context)
 
 @login_required
 def edit_story(req,story_id):

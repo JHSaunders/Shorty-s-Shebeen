@@ -55,6 +55,14 @@ class Story(models.Model):
             end = preview_size
         return self.text[0:end-1].strip()+'...'
     
+    @property       
+    def short_preview(self):
+        preview_size = 200
+        end = self.text.rfind('\n',0,preview_size)
+        if end < 0:
+            end = preview_size
+        return self.text[0:end-1].strip()+'...'
+    
     @property
     def genres(self):        
         first = True
@@ -65,7 +73,7 @@ class Story(models.Model):
             first = False
             s=s+g.name
         return s
-
+    
 popularity.register(Story)
     
 class Genre(models.Model):

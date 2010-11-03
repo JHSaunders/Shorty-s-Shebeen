@@ -97,5 +97,16 @@ Archive
 
 {% block content %}
 {% include "stories/story_list.html" %}
+
+{% if is_paginated %}
+    {% if page_obj.has_previous %}
+        <a href="{% url story_archive%}{% query_string 'page=page_obj.previous_page_number' 'page'%}">&lt;&lt;</a>
+    {% endif %}
+Page {{page_obj.number}} of {{paginator.num_pages}} 
+    {% if page_obj.has_next %}
+        <a href="{% url story_archive%}{% query_string 'page=page_obj.next_page_number' 'page'%}">&gt;&gt;</a>
+    {% endif %}
+{% endif %}
+
 {% endblock %}
 </div>
