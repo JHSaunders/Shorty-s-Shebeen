@@ -34,7 +34,7 @@ Archive
 {%endblock%}
 
 {%block sidebar%}
-<h1 class="title">Filter</h1>
+<div class="section"><h2 class="name"><a href="#">Filter</a></h2></div>
 <div>
 
     <h3>Genre</h3>
@@ -96,6 +96,11 @@ Archive
 {% endblock %}
 
 {% block content %}
+<div class="section">
+<h2 id="bodytitle"class="name">
+Archive
+</h2>
+</div>
 {% include "stories/story_list.html" %}
 
 {% if is_paginated %}

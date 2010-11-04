@@ -37,6 +37,8 @@ def home(req):
     
     context["shortys_story"] = Story.published_stories.order_by('?')[0] 
     
+    context["genres"] = Genre.objects.all()
+    
     return direct_to_template(req,"stories/home.html",context)
 
 @login_required

@@ -11,7 +11,7 @@
 
 {% block content %}
 <div class="story">
-<h2 class="title">{{object.title}}</h2>
+<h2 class="title"><a>{{object.title}}</a></h2>
 <p class="author">by <a href="{% url view_author object.author.id%}">{{object.author}}</a></p>
 <p>{{object.genres}}</p>
 
