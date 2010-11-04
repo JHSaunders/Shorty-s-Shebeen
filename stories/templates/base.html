@@ -54,7 +54,7 @@
 	
 </div>
 
-
+<div id="menu-buffer" >
 <div id="menu" >
 <ul id="jsddm">
 <li><a href="{% url home %}" class="menuheadlink">Story Central</a></li>
@@ -67,24 +67,26 @@
 <li><a href="{% url about %}" class="menuheadlink">About</a></li>
 <li><a href="{% url story_archive %} class="menuheadlink"">Archives</a></li>
 <li>
+<span>
 <form action = "{% url search %}" method="GET" id="search-form" style="display:inline;">
 <input type="text" name="search"/>
 <input type="submit" name="submit" value="Search"/> 
 </form>
+</span>
 </li>
 </ul>
 
-<span class="user-info">
+<ul id="user-info">
 {% if user.is_anonymous %}
-<a href="{% url auth_login %}">Login</a>
-<a href="{% url registration_register %}">Register</a>
-
+<li><a href="{% url auth_login %}">Login</a></li>
+<li><a href="{% url registration_register %}">Register</a></li>
 {% else %}
-{{user.username}}
-<a href="{% url author_dashboard %}">Dashboard</a>
-<a href="{% url auth_logout %}">Logout</a>
-</span>
+<li><a>{{user.username}}</a></li>
+<li><a href="{% url author_dashboard %}">Dashboard</a></li>
+<li><a href="{% url auth_logout %}">Logout</a></li>
+</ul>
 {% endif %}
+</div>
 </div>
 
 {%if sidebar%}
@@ -102,9 +104,7 @@
     {% endblock %}
 </div>
 
-<div id="footer">
-Copyright (c) 2010 Shorty's ~ All stories are the property of their authors
-</div>
+
 
 {% endblock %}
 </div>
