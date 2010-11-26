@@ -5,7 +5,8 @@
 
 #menu
 {
-  height:25px;
+  height:29px;
+  background-image: url(/media/img/greyback.png);
 }
 
 #user-info
@@ -20,32 +21,41 @@
 	#jsddm li, #user-info li
 	{	float: left;
 		list-style: none;
-		font: 12px Tahoma, Arial;
+		font: 16px Tahoma, Arial;
 		}
 
 	#jsddm li a, #user-info li a
 	{	
-	  display: block;
+	    display: block;
 		padding: 5px 12px;
 		text-decoration: none;
-		border-right: 1px solid white;
-		width: 70px;
 		color: #EAFFED;
 		white-space: nowrap}
-  
+
   #jsddm li span, #user-info li span
   { 
     display: block;
     padding: 5px 12px;
-		padding: 0px 0px;
-		text-decoration: none;
-		border-right: 1px solid white;
-		color: #EAFFED;
-		white-space: nowrap
+	padding: 0px 0px;
+	text-decoration: none;
+	border-right: 1px solid white;
+	color: #EAFFED;
+	white-space: nowrap
   }
   
 	#jsddm li a:hover, #user-info li a:hover
-	{	background: #1A4473}
+	{
+    	background: #840403 url(/media/img/redback.jpg) repeat left top;
+   		-moz-border-radius:8px;
+        -webkit-border-radius:8px;
+        -opera-border-radius:8px;
+        -khtml-border-radius:8px;
+        border-radius:8px;
+        box-shadow:0px 0px 20px #B45F04;
+        -webkit-box-shadow:0px 0px 20px #B45F04;
+        -moz-box-shadow: 0px 0px 20px #B45F04;
+
+	}
 		
 		#jsddm li ul
 		{	margin: 0;

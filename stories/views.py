@@ -31,8 +31,9 @@ def home(req):
     context["top_rated"] = Story.published_stories.extra(select={'rating_scorex': 
             '((100/%s*rating_score/(rating_votes+%s))+100)/2' % 
             (Story.rating.range, Story.rating.weight)}).order_by('-rating_scorex')
-    
+
     context["random_story"] = Story.published_stories.order_by('?')[0]
+    
     context["winner_story"] = Story.published_stories.all()[0]
     
     context["shortys_story"] = Story.published_stories.order_by('?')[0] 

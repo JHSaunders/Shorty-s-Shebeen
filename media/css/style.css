@@ -66,16 +66,6 @@ a:hover {
 	margin: 0 auto;
 }
  
-/* Menu */
- 
-#menu {
-	height: 38;
-	margin: 0 auto;
-	padding: 0;
-	background: #1E1E1E;
-	background-image: url(/media/img/greyback.png);
-}
- 
  
 /* Page structure */
 
@@ -90,20 +80,22 @@ a:hover {
 	padding: 2px;
 }
 
-.content-with-sidebar
+.content_frame_with_side_bar
 {
     width: 740px;
+    float:left;
 }
 
 #sidebar
 {
     float:right;
-    max-width:200px;
+    width:190px;
 }
+
 
 #left {
 	padding: 0px;
-	width: 378px;
+	width: 382px;
 	float:left;
 	margin-top: 0px;
 	margin-right: 2px;
@@ -113,7 +105,7 @@ a:hover {
 
 #middle {
 	padding: 0px;
-	width: 378px;
+	width: 382px;
 	float:left;
 	margin-top: 0px;
 	margin-right: 2px;
@@ -121,7 +113,7 @@ a:hover {
 	margin-left: 0px;
 }
 /* Section Headers */
-.section {
+.section, #content > .title {
 	background: #1E1E1E url(/media/img/greenback.png) repeat left top;
 	padding: 5px;
 	margin: 5px;
@@ -135,9 +127,10 @@ a:hover {
 -moz-box-shadow: 0px 0px 4px #04B404; 
 }
 
- .section .name {
-		letter-spacing: -0.5px;
-	color: #3BA20E; text-shadow:0px 0px 30px #000000;
+.section .name , #content > .title{
+	letter-spacing: -0.5px;
+	color: #3BA20E; 
+	text-shadow:0px 0px 30px #000000;
 	padding-top: 0px;
 	padding-right: 0;
 	padding-bottom: 0;
@@ -153,7 +146,7 @@ a:hover {
 
 /* Story List */
 
-.story {
+.story , .content_frame ,.sidebar_frame{
 	background-color: #F6E3CE;
 	padding: 4px;
 	-moz-border-radius:8px;
@@ -169,16 +162,14 @@ a:hover {
 	-webkit-box-shadow:0px 0px 4px #B45F04;
 	-moz-box-shadow: 0px 0px 4px #B45F04;
 }
- 
 
-
-.story .title {
+.story>.title, .content_frame h1.title,.sidebar_frame>h1{
 	
 	letter-spacing: -0.5px;
 	background: #840403 url(/media/img/redback.jpg) repeat left top;
 	background-color: #840403;
 	color: #DF7401;
-	color: #3BA20E; text-shadow:0px 0px 20px #000000;
+	text-shadow:0px 0px 20px #000000;
 	padding-top: 5px;
 	padding-right: 0;
 	padding-bottom: 5px;
@@ -189,8 +180,8 @@ a:hover {
 	-khtml-border-radius:8px;
 	border-radius:8px;
 	box-shadow:0px 0px 20px #B45F04;
--webkit-box-shadow:0px 0px 20px #B45F04;
--moz-box-shadow: 0px 0px 20px #B45F04;
+    -webkit-box-shadow:0px 0px 20px #B45F04;
+    -moz-box-shadow: 0px 0px 20px #B45F04;
 }
  
 .story .title a {
@@ -261,5 +252,11 @@ a:hover {
 #footer a {
 	font-weight: bold;
 	color: #898989;
+}
+
+/* Tables */
+table {
+    vertical-align:top;
+    text-align:left;
 }
 

@@ -49,18 +49,14 @@ class Story(models.Model):
     
     @property        
     def preview(self):
-        preview_size = 500
-        end = self.text.rfind('\n',0,preview_size)
-        if end < 0:
-            end = preview_size
+        preview_size = 800
+        end = min(preview_size,len(self.text))
         return self.text[0:end-1].strip()+'...'
     
     @property       
     def short_preview(self):
         preview_size = 200
-        end = self.text.rfind('\n',0,preview_size)
-        if end < 0:
-            end = preview_size
+        end = min(preview_size,len(self.text))
         return self.text[0:end-1].strip()+'...'
     
     @property

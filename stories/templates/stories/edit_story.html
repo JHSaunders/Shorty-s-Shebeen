@@ -1,14 +1,17 @@
-{% extends "base.html" %}
+{% extends "stories/single_frame_page.html" %}
 
 {% load markup %}
-
+{%block title%}Editing{%endblock%}
 {% block content %}
 <form action="" method="post">{% csrf_token %}
 <table>
 {{form}}
 </table>
 <input type="submit" value="Submit Changes" />
-
 </form>
-
+<script type="text/javascript">
+//Keeps the title in sync
+$("#id_title").keyup(function(){$("#content>h1.title").html($("#id_title").val())})
+$("#id_title").keyup()
+</script>
 {% endblock %}

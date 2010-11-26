@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block outer_content %}
+<h1 class="title">{% block title %}{% endblock %}</h1>
+<div class="content_frame_with_side_bar">
+{% block content %}
+{% block frame_content %}
+{% endblock %}
+{% endblock %}
+</div>
+<div id="sidebar" class = "sidebar_frame">
+{% block sidebar%}
+{% endblock%}
+</div>
+{% endblock %}

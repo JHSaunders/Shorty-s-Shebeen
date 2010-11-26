@@ -1,12 +1,14 @@
-{% extends "base.html" %}
-{% load rating_tags %}
-{% block content %}
+{% extends "stories/sidebar_page.html" %}
 {% load popularity_tags %}
+{% load rating_tags %}
 
-<h1>Dashboard</h1>
-<a href="{% url edit_profile %}">Edit Profile</a>
-<a href="{% url create_story %}">Write new story</a>
+{% block title %}
+Author's Dashboard
+{% endblock %}
 
+{% block content %}
+<div class="content_frame">
+<h1 class="title">Your Stories</h1>
 <table>
 <tr>
 <th>Title</th>
@@ -27,5 +29,13 @@
 </tr>
 {%endfor%}
 </table>
+</div>
+{% endblock %}
 
+{% block sidebar %}
+<h1 class="title">Actions</h1>
+<ul>
+<li><a href="{% url edit_profile %}">Edit Profile</a></li>
+<li><a href="{% url create_story %}">New story</a></li>
+</ul>
 {% endblock %}

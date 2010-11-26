@@ -30,7 +30,6 @@
 
 {% block body %}
 <div id="header">
-
 <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="960" height="250" id="FlashID" title="Shorty's Short Story Shebeen">
   <param name="movie" value="/media/flash/smoke.swf" />
   <param name="quality" value="high" />
@@ -51,7 +50,7 @@
   </object>
   <!--<![endif]-->
 </object>
-	
+
 </div>
 
 <div id="menu-buffer" >
@@ -65,7 +64,8 @@
     {% endfor %}
    </ul>
 <li><a href="{% url about %}" class="menuheadlink">About</a></li>
-<li><a href="{% url story_archive %} class="menuheadlink"">Archives</a></li>
+<li><a href="{% url story_archive %}" class="menuheadlink">Archives</a></li>
+<!--
 <li>
 <span>
 <form action = "{% url search %}" method="GET" id="search-form" style="display:inline;">
@@ -74,6 +74,7 @@
 </form>
 </span>
 </li>
+-->
 </ul>
 
 <ul id="user-info">
@@ -81,30 +82,20 @@
 <li><a href="{% url auth_login %}">Login</a></li>
 <li><a href="{% url registration_register %}">Register</a></li>
 {% else %}
-<li><a>{{user.username}}</a></li>
+<li><a href="{% url edit_profile %}">{{user}}</a></li>
 <li><a href="{% url author_dashboard %}">Dashboard</a></li>
-<li><a href="{% url auth_logout %}">Logout</a></li>
+<li><a href="{% url auth_logout %}?next=/">Logout</a></li>
 </ul>
 {% endif %}
 </div>
 </div>
 
-{%if sidebar%}
-<div id="sidebar">
-{% block sidebar%}
-{% endblock%}
-</div>
-{%endif%}
-
-<div id="content" 
-{%if sidebar %} class="content-with-sidebar" {%endif%}>
-
-    {% block content %}
-    
+<div id="content">
+    {% block outer_content %}
+    {% block content %}    
+    {% endblock %}
     {% endblock %}
 </div>
-
-
 
 {% endblock %}
 </div>

@@ -15,6 +15,7 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
     
+#    url(r'^accounts/logout',' django.contrib.auth.views.logout',name="logout_go_home"),
     # Registration    
     (r'^accounts/', include('registration.urls')),
     

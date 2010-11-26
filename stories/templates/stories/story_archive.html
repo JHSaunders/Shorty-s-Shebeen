@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "stories/sidebar_page.html" %}
 {% load archive_tags %}
 {% load markup %}
 
@@ -29,12 +29,12 @@ function()
 </script>
 {%endblock%}
 
-{% block bodytitle%}
+{% block title%}
 Archive
 {%endblock%}
 
 {%block sidebar%}
-<div class="section"><h2 class="name"><a href="#">Filter</a></h2></div>
+<h1 class="name">Filter</h1>
 <div>
 
     <h3>Genre</h3>
@@ -77,7 +77,7 @@ Archive
         </li>    
     {% endfor %}
     </ul>
-
+    <!--
     <h3>Search:</h3>
     <form action = "{% url story_archive%}" method="GET">
         <input type="text" name="search" value="{{request.GET.search}}"/>
@@ -85,7 +85,7 @@ Archive
         <a href="{% url story_archive%}{% query_string '' 'search,submit,page'%}">Clear Search</a>
         {% query_string_as_hiddens '' 'search,page,submit'%}
     </form>
-    
+    -->
     <h3>Order by:</h3>
     <ul class="filter-menu">
     
@@ -95,12 +95,8 @@ Archive
 </div>
 {% endblock %}
 
-{% block content %}
-<div class="section">
-<h2 id="bodytitle"class="name">
-Archive
-</h2>
-</div>
+{% block frame_content%}
+
 {% include "stories/story_list.html" %}
 
 {% if is_paginated %}
