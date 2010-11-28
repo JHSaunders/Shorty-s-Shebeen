@@ -1,0 +1,13 @@
+#story_editor {
+    width:100%;
+}
+#id_text {
+    width:95%;
+    height:600px;
+}
+
+#story_editor input[type="text"]{
+    width:50%;
+}
+
+

@@ -24,6 +24,8 @@ urlpatterns = patterns('',
     
     url(r'^author/dashboard', views.author_dashboard,name="author_dashboard"),
     
+    url(r'^genre/(?P<genre_id>\d+)/view',views.view_genre, name="view_genre"),
+    
     url(r'facebook/test', views.facebook_test),
 )
 

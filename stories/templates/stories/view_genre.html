@@ -1,14 +1,11 @@
 {% extends "stories/story_archive.html" %}
 
 {% block title%}
-{{author_obj}}
+{{genre_obj}}
 {%endblock%}
 
 {%block info_frame%}
 <div id="sidebar" class = "sidebar_frame">
-<h1 class="name">Profile</h1>
-<p>
-{{author_obj.get_profile.about}}
-</p>
+<h1 class="name">{{genre_obj}}</h1>
 </div>
 {%endblock%}

@@ -1,6 +1,6 @@
 {% load comments i18n %}
 
-<form action="{% comment_form_target %}" method="post">{% csrf_token %}
+<form id="comment_form" action="{% comment_form_target %}" method="post">{% csrf_token %}
   {% if next %}<input type="hidden" name="next" value="{{ next }}" />{% endif %}
   {% for field in form %}
     {% if field.is_hidden %}
@@ -23,18 +23,17 @@
       </tr>    
     {% endif %}
       <tr>
-        <td>{{ form.comment.label_tag }}</td>
-        <td>{% if form.comment.errors %}<div class="error">{{ form.comment.errors }}</div>{% endif %}{{ form.comment }}</td>
+        <td colspan="2">{% if form.comment.errors %}<div class="error">{{ form.comment.errors }}</div>{% endif %}{{ form.comment }}</td>
       </tr>
-      
       <tr style="display:none;">
         <td>{{ form.honeypot.label_tag }}</td>
         <td>{% if form.honeypot.errors %}<div class="error">{{ form.honeypot.errors }}</div>{% endif %}{{ form.honeypot }}</td>
       </tr>
   </table>
   
-  <p class="submit">
+  <div class="submit">
     <input type="submit" name="preview" class="submit-preview" value="{% trans "Preview" %}" />
     <input type="submit" name="post" class="submit-post" value="{% trans "Post" %}" />
-  </p>
+    Comments can use <a href="http://daringfireball.net/projects/markdown/syntax" target="_blank">Markdown</a> syntax. Please check your comments before posting using the "{% trans "Preview" %}" button.
+  </div>
 </form>

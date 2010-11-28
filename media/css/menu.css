@@ -62,7 +62,8 @@
 			padding: 0;
 			position: absolute;
 			visibility: hidden;
-			border-top: 1px solid white}
+			background: #840403 url(/media/img/greyback.png) repeat left top;
+			}
 		
 		#jsddm li ul li
 		{	float: none;
@@ -70,7 +71,7 @@
 		
 		#jsddm li ul li a
 		{	width: auto;
-			background: #9F1B1B}
+		}
 		
 		#jsddm li ul li a:hover
-		{	background: #7F1616}
+		{}

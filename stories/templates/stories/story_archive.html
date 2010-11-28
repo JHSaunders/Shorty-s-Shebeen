@@ -13,13 +13,13 @@ function()
     function()
     {        
 
-        if($(this).parent().hasClass('menu-item-contracted'))
+        if($(this).parent().parent().hasClass('menu-item-contracted'))
         {
-            $(this).parent().removeClass('menu-item-contracted').addClass('menu-item-expanded');
+            $(this).parent().parent().removeClass('menu-item-contracted').addClass('menu-item-expanded');
         }
         else
         {   
-            $(this).parent().removeClass('menu-item-expanded').addClass('menu-item-contracted');
+            $(this).parent().parent().removeClass('menu-item-expanded').addClass('menu-item-contracted');
         }
     }
     );
@@ -33,42 +33,46 @@ function()
 Archive
 {%endblock%}
 
-{%block sidebar%}
+{%block sidebar_frame%}
+{%block info_frame%}
+{%endblock%}
+<div id="sidebar" class = "sidebar_frame">
 <h1 class="name">Filter</h1>
 <div>
 
+{%if not genre_obj%}
     <h3>Genre</h3>
     <ul class="filter-menu">
         <li>
-            <a href="{%url story_archive%}{% query_string '' 'genre,page'%}"
+            <a href="{{request.path}}{% query_string '' 'genre,page'%}"
             {%if not genre%}class="menu-item-selected"{%endif%}>All Genres</a>
         </li>
     {%for dgenre in genres%}
         <li>
-            <a href="{%url story_archive%}{% query_string 'genre=dgenre' 'page'%}"
+            <a href="{{request.path}}{% query_string 'genre=dgenre' 'page'%}"
             {%ifequal genre dgenre.name %}class="menu-item-selected"{%endifequal%}>{{dgenre}}</a>
         </li>
     {%endfor%}
     </ul>
+{% endif %}
 
     <h3>Publication Date</h3>
     <ul class="filter-menu">
     <li>
-        <a href="{% url story_archive%}{% query_string '' 'year,month,page'%}"  
+        <a href="{{request.path}}{% query_string '' 'year,month,page'%}"  
         {%if not year%}class="menu-item-selected"{%endif%}>
             All Dates
         </a>
     </li>
     {% for dyear, months in dates.items %}
     <li {%ifnotequal year dyear %}class="menu-item-contracted"{%else%}class="menu-item-expanded"{%endifnotequal%}> 
-        <a href="{% url story_archive%}{% query_string 'year=dyear' 'year,month,page'%}" 
-        {%ifequal year dyear %}class="menu-item-selected"{%endifequal%}>
-            {{dyear}}</a>
-        <img class="expand-button"/>
+        <span {%ifequal year dyear %}class="menu-item-selected"{%endifequal%} ><a href="{{request.path}}{% query_string 'year=dyear' 'year,month,page'%}">
+            {{dyear}}</a><img class="expand-button"/></span>
+        
         <ul>
         {% for dmonth in months%}
             <li>
-            <a href="{% url story_archive%}{% query_string 'year=dyear,month=dmonth.month' 'year,month,page'%}" 
+            <a href="{{request.path}}{% query_string 'year=dyear,month=dmonth.month' 'year,month,page'%}" 
             {%ifequal year dyear %}{%ifequal month dmonth.month %}class="menu-item-selected"{%endifequal%}{%endifequal%}>
             {{dmonth|date:"F"}}</a>
             </li>
@@ -89,9 +93,10 @@ Archive
     <h3>Order by:</h3>
     <ul class="filter-menu">
     
-    <li><a href="{% url story_archive%}{% query_string 'order=order_date' ''%}" {%ifequal order "order_date" %}class="menu-item-selected"{%endifequal%}>Date </a></li>
-    <li><a href="{% url story_archive%}{% query_string 'order=order_rating' '' %}" {%ifequal order "order_rating" %}class="menu-item-selected"{%endifequal%}>Rating</a></li>
+    <li><a href="{{request.path}}{% query_string 'order=order_date' ''%}" {%ifequal order "order_date" %}class="menu-item-selected"{%endifequal%}>Date </a></li>
+    <li><a href="{{request.path}}{% query_string 'order=order_rating' '' %}" {%ifequal order "order_rating" %}class="menu-item-selected"{%endifequal%}>Rating</a></li>
     </ul>
+</div>
 </div>
 {% endblock %}
 
@@ -101,11 +106,11 @@ Archive
 
 {% if is_paginated %}
     {% if page_obj.has_previous %}
-        <a href="{% url story_archive%}{% query_string 'page=page_obj.previous_page_number' 'page'%}">&lt;&lt;</a>
+        <a href="{{request.path}}{% query_string 'page=page_obj.previous_page_number' 'page'%}">&lt;&lt;</a>
     {% endif %}
 Page {{page_obj.number}} of {{paginator.num_pages}} 
     {% if page_obj.has_next %}
-        <a href="{% url story_archive%}{% query_string 'page=page_obj.next_page_number' 'page'%}">&gt;&gt;</a>
+        <a href="{{request.path}}{% query_string 'page=page_obj.next_page_number' 'page' %}">&gt;&gt;</a>
     {% endif %}
 {% endif %}
 

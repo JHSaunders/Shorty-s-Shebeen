@@ -104,7 +104,7 @@ def render_to_pdf(template_src, context_dict):
 def download_story(req,story_id):
     return render_to_pdf('stories/pdf_story.html',{"object":Story.objects.get(id=story_id)})
 
-def story_archive(req):
+def archive(req,template_name,extra_context={}):
     search=req.GET.get("search")
     author=req.GET.get("author")
     genre=req.GET.get("genre")
@@ -120,20 +120,23 @@ def story_archive(req):
     context["year"] = None if year == None else int(year) 
     context["month"] = None if month == None else int(month)
     context["order"] = order
-    
+    context["genres"] = Genre.objects.all()
+    for k,v in extra_context.items():
+        context[k] = v
+
     queryset = Story.published_stories.all()
     
-    if genre != None:        
-        queryset = queryset.filter(genre__name = genre)    
-    if author != None:
-        queryset = queryset.filter(author__id = author)
+    if context["genre"] != None:        
+        queryset = queryset.filter(genre__name = context["genre"])
+    if context["author"] != None:
+        queryset = queryset.filter(author__id = context["author"])
     
     if month !=None:
         next_month = int(month) + 1
         next_year = int(year)
         if next_month == 13:
             next_month = 1
-            next_year = next_year+1
+            next_year = next_year + 1
         queryset = queryset.filter(date_published__gte = datetime.date(int(year), int(month),1))
         queryset = queryset.filter(date_published__lt = datetime.date(int(next_year), int(next_month),1))
     elif year != None:
@@ -141,14 +144,14 @@ def story_archive(req):
         queryset = queryset.filter(date_published__lt = datetime.date(int(year)+1,1,1))
     
     if order=="order_rating":
-        queryset = queryset.extra(select={'rating_scorex': 
+        queryset = queryset.extra(select={'rating_scorex':
             '((100/%s*rating_score/(rating_votes+%s))+100)/2' % 
             (Story.rating.range, Story.rating.weight)})
         queryset = queryset.order_by('-rating_scorex')
     else:
         queryset = queryset.order_by('-date_published')
         
-    context["genres"] = Genre.objects.all()    
+
     
     years = Story.objects.dates('date_published','year')
     months = Story.objects.dates('date_published','month')
@@ -159,17 +162,19 @@ def story_archive(req):
     for month in months:
         date_filter[month.year].append(month)
     context["dates"] = date_filter            
-
-    return object_list(req,queryset,template_name="stories/story_archive.html", paginate_by=10, template_object_name="story", extra_context=context)
-
-def view_author(req,author_id):
     
-    if req.user.id == int(author_id):
-        qs = Story.objects.all()
-    else:
-        qs = Story.published_stories.all()
-    qs = qs.filter(author__id=author_id)
-    return object_list(req,qs,template_name="stories/view_author.html", paginate_by=10, template_object_name="story", extra_context={"author":User.objects.get(id=author_id)})
+    return object_list(req,queryset,template_name=template_name, paginate_by=10, template_object_name="story", extra_context=context)
+
+def story_archive(req):
+    return archive(req,"stories/story_archive.html");
+    
+def view_genre(req,genre_id):
+    genre_obj = Genre.objects.get(id=genre_id)
+    return archive(req,"stories/view_genre.html",{"genre":genre_obj.name,"genre_obj":genre_obj});
+
+def view_author(req,author_id):    
+    author_obj = User.objects.get(id=author_id)
+    return archive(req,"stories/view_author.html",{"author":author_id,"author_obj":author_obj});
     
 def about(req):
     return direct_to_template(req,"stories/about.html",{})

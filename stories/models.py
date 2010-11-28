@@ -94,7 +94,6 @@ def user_get_or_create_profile(self):
     try:
         return self.get_profile()
     except Exception as e:
-        print e
         profile = AuthorProfile(user=self)
         profile.save()
         return profile
