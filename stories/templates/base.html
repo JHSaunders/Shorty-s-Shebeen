@@ -59,7 +59,7 @@
 <li><a href="{% url home %}" class="menuheadlink">Story Central</a></li>
 <li><a>Genres</a>
   <ul>
-    {% for genre in genres %}
+    {% for genre in genre_list %}
     <li><a href="{% url view_genre genre.id %}" >{{genre}}</a></li>
     {% endfor %}
    </ul>
@@ -74,7 +74,7 @@
 </form>
 </span>
 </li>
--->
+--> 
 </ul>
 
 <ul id="user-info">
