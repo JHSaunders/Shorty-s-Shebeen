@@ -42,6 +42,12 @@ def home(req):
     
     return direct_to_template(req,"stories/home.html",context)
 
+def random_story(req):
+    context = {}
+    context["story"]=Story.published_stories.order_by('?')[0]
+    context["do_short_preview"]=True
+    return direct_to_template(req,"stories/story_preview.html",context)
+
 @login_required
 def edit_story(req,story_id):
     if not Story.objects.get(id=story_id).author == req.user:
@@ -87,9 +93,6 @@ def rate_story(req,story_id):
     
     Story.published_stories.get(id=story_id).rating.add(score=rating, user=req.user, ip_address=req.META['REMOTE_ADDR'])
     return HttpResponse("ok")    
-
-def random_story(req):
-    return HttpResponseRedirect(reverse('read_story',args=[Story.published_stories.order_by('?')[0].id]))
     
 def render_to_pdf(template_src, context_dict):
     template = get_template(template_src)
@@ -163,7 +166,7 @@ def archive(req,template_name,extra_context={}):
         date_filter[month.year].append(month)
     context["dates"] = date_filter            
     
-    return object_list(req,queryset,template_name=template_name, paginate_by=10, template_object_name="story", extra_context=context)
+    return object_list(req,queryset,template_name=template_name, paginate_by=2, template_object_name="story", extra_context=context)
 
 def story_archive(req):
     return archive(req,"stories/story_archive.html");

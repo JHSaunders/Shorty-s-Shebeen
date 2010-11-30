@@ -53,15 +53,18 @@ Hide Story <img id="btn-hide-story" src="/media/img/contract.png" alt="Hide Stor
 
 
 
-<a href="{% url download_story object.id%}">Download pdf</a>
-{% ifequal user object.author %}
-<a href="{% url edit_story object.id %}">Edit</a>
-{% endifequal %}
+
 <a href="http://www.addthis.com/bookmark.php" 
       class="addthis_button"
       addthis:url="http://example.com"
       addthis:title="An Example Title"
       addthis:description="An Example Description"></a>
+{% ifequal user object.author %}
+<a href="{% url download_story object.id%}">Download PDF</a>
+
+<a href="{% url edit_story object.id %}">Edit</a>
+{% endifequal %}
+
 <h3>Rating</h3>
 <table>
 <tr>
@@ -90,6 +93,9 @@ $(function(){
 <h3>Comments</h3>
 {% render_comment_list for object %}
 <h3>Post a new comment</h3>
+{% if user.is_anonymous %}
+(<a href="{% url auth_login %}?next={{request.path}}">Login</a> to comment using your account)
+{% endif %}
 {% render_comment_form for object %}
 </div>
 {% endblock %}

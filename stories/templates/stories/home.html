@@ -1,9 +1,32 @@
 {% extends "base.html" %}
 
+{% block scripts %}
+{{block.super}}
+<script type="text/javascript">
+$(document).ready(
+    function() {
+    $('#refresh_random').click(
+    function()
+    {
+        $("#random_story").fadeTo(400,0.0,
+        function() {
+            $("#random_story").load("{%url random_story %}",
+            function() {
+                $('#random_story input[type=radio].star').rating();
+                $("#random_story").fadeTo(400,1);
+            });
+        });
+    }
+    );
+}
+);
+</script>
+{% endblock %}
+
 {% block content %}
 <div id="left" class="home_column">
   <div class="section" >
-  <h2 class="name"><a href="#">Latest</a></h2>
+  <h2 class="name"><a href="{%url story_archive %}?order=order_date">Latest</a></h2>
   </div>
   {% with latest as story_list %}
   {% include "stories/story_list.html" %}
@@ -13,7 +36,7 @@
 
 <div id="middle" class="home_column">
   <div class="section">
-  <h2 class="name"><a href="#">Top Rated</a></h2>
+  <h2 class="name"><a href="{%url story_archive %}?order=order_rating">Top Rated</a></h2>
   </div>
   {% with top_rated as story_list %}
   {% include "stories/story_list.html" %}
@@ -24,7 +47,7 @@
 
 <div id="sidebar">
 <div class="section">
-<h2 class="name"><a href="#">Random Story </a><img src="/media/img/Refresh-icon.png" alt="" width="25" height="25" align="top" /></h2>
+<h2 class="name">Random Story<img id="refresh_random" src="/media/img/Refresh-icon.png" alt="" width="25" height="25" align="top" /></h2>
 </div>
 <div id="random_story">
   {% with random_story as story %}
