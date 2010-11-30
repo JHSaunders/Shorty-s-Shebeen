@@ -74,7 +74,8 @@ popularity.register(Story)
     
 class Genre(models.Model):
     name = models.CharField(max_length = 100)
-    
+    description = models.TextField(blank=True)
+    image = models.ImageField(upload_to="img/genres/")
     def __unicode__(self):
         return self.name
 

@@ -13,7 +13,11 @@
 <div class="story">
 <h2 class="title"><a>{{object.title}}</a></h2>
 <p class="author">by <a href="{% url view_author object.author.id%}">{{object.author}}</a></p>
-<p>{{object.genres}}</p>
+<p>
+{% for genre in object.genre.all %}
+<a href="{% url view_genre genre.id %}">{{genre}}</a>{%if not forloop.last %}, {%endif%}
+{% endfor %}
+</p>
 
 <div id="story-preview">
 {{object.preview|markdown}}
