@@ -18,7 +18,6 @@ class RatingStarNode(template.Node):
                     
         self.classes = classes
         self.disabled = disabled
-        print disabled
         
     def render(self, context):
         

@@ -100,3 +100,16 @@ def user_get_or_create_profile(self):
 
 User.__unicode__= user_unicode
 User.profile = property(user_get_or_create_profile)
+
+class Competition(models.Model):
+    name = models.CharField(max_length=250)
+    description = models.TextField()
+    date = models.DateField()
+    active = models.BooleanField()
+    judged = models.BooleanField()
+    winner = models.ForeignKey(Story)
+    result = models.TextField()
+
+class CompetitionEntry(models.Model):
+    competition = models.ForeignKey(Competition)
+    story = models.ForeignKey(Story)
