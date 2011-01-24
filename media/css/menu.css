@@ -12,16 +12,19 @@
 #user-info
 {
   float:right;
+  margin: 0;
+  padding: 0;
 }
 
 #jsddm
 {	margin: 0;
-	padding: 0}
+	padding: 0;}
 	
 	#jsddm li, #user-info li
 	{	float: left;
 		list-style: none;
 		font: 16px Tahoma, Arial;
+		cursor:pointer;
 		}
 
 	#jsddm li a, #user-info li a

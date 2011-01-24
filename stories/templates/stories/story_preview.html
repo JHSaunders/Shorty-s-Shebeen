@@ -24,11 +24,16 @@
 <p>{% rating_star_form 5 story.rating.get_rating "star" True %}</p>
 <p>&nbsp;</p>
 
-<p>{{story.genres}}<br/>{{story.date_published}} ({{comment_count}}&nbsp;comments)
+<p>
+{% for genre in story.genre.all %}
+<a href="{% url view_genre genre.id %}">{{genre}}</a>{%if not forloop.last %}, {%endif%}
+{% endfor %}
+<br/>
+{{story.date_published}} ({{comment_count}}&nbsp;comments)
 
 {%ifequal story.author user%}
 <a href="{% url edit_story story.id%}">Edit</a>
-{%endifequal%} 
+{%endifequal%}
 </p>
 
 </div>

@@ -6,12 +6,17 @@ urlpatterns = patterns('',
     url(r'^$',views.home,name="home"),
     
     url(r'^story/(?P<story_id>\d+)/read',views.read_story,name="read_story"),
+    
     url(r'^story/(?P<story_id>\d+)/download',views.download_story,name="download_story"),
+    
     url(r'^story/(?P<story_id>\d+)/edit',views.edit_story,name="edit_story"),
+    
     url(r'^story/create',views.create_story,name="create_story"),
+    
     url(r'^story/random',views.random_story,name="random_story"),
+    
     url(r'^story/(?P<story_id>\d+)/rate',views.rate_story,name="rate_story"),
-         
+    
     url(r'^archive/$',views.story_archive,name="story_archive"),
     
     url(r'^about/$',views.about,name="about"),

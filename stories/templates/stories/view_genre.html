@@ -1,11 +1,17 @@
 {% extends "stories/story_archive.html" %}
-
+{%load markup %}
 {% block title%}
 {{genre_obj}}
 {%endblock%}
 
 {%block info_frame%}
 <div id="sidebar" class = "sidebar_frame">
-<h1 class="name">{{genre_obj}}</h1>
+<h1 class="name">{{genre_obj.name}}</h1>
+{% if genre_obj.image %}
+<img class="genre-image" src="/media/{{genre_obj.image}}" alt="{{genre_obj.name}}" />
+{% endif %}
+{% if genre_obj.description %}
+<p>{{genre_obj.description|markdown}}</p>
+{% endif %}
 </div>
 {%endblock%}
