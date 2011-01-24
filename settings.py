@@ -113,6 +113,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'popularity.context_processors.most_viewed',
     'popularity.context_processors.recently_viewed',
     'popularity.context_processors.recently_added',
+    'stories.context_processors.genre_list',
 )
 
 AUTHENTICATION_BACKENDS = (
