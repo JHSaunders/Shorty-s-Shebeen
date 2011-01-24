@@ -3,7 +3,7 @@ import settings
 import views
 
 urlpatterns = patterns('',
-    url(r'^$',views.home,name="home"),
+    url(r'^home$',views.home,name="home"),
     
     url(r'^story/(?P<story_id>\d+)/read',views.read_story,name="read_story"),
     

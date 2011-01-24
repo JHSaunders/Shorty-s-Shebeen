@@ -92,6 +92,7 @@ TEMPLATE_DIRS = (
 
 INSTALLED_APPS = (
     'stories',
+    'shortys_construction',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -99,7 +100,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.admin',
     'django.contrib.admindocs',
-    'django.contrib.markup',    
+    'django.contrib.markup',
     'django.contrib.comments',
     'registration',
     'djangoratings',
