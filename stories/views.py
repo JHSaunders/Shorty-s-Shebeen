@@ -34,7 +34,7 @@ def home(req):
 
     context["random_story"] = Story.published_stories.order_by('?')[0]
     
-    context["winner_story"] = Story.published_stories.all()[0]
+    context["winner_story"] = Competition.objects.filter(judged=True).order_by('-date')[0].winner
     
     context["shortys_story"] = Story.published_stories.order_by('?')[0] 
     
@@ -213,3 +213,9 @@ def facebook_test(req):
     target_id = 'nf')
     
     return test(req)
+    
+def list_competitions(req):
+   return direct_to_template(req,"stories/competitions_list.html",{'open_competitions':
+    Competition.objects.filter(active=True),'closed_competitions':
+    Competition.objects.filter(judged=True)})
+    

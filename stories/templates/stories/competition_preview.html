@@ -1,0 +1,14 @@
+{% load markup %}
+
+<div class="story">
+<h2 class="title" >{{competition.name}}</h2>
+<h2>Due date: {{competition.date}}</h2>
+<div>
+{{competition.description|markdown}}
+</div>
+{% if competition.judged %}
+Winner: <a href="{% url read_story competition.winner.id %}">{{competition.winner}}</a> by <a href="{% url view_author competition.winner.author.id %}">{{competition.winner.author}}</a>
+{% endif %}
+</div>
+
+

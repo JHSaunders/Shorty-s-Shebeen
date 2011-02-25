@@ -32,6 +32,8 @@ urlpatterns = patterns('',
     url(r'^genre/(?P<genre_id>\d+)/view',views.view_genre, name="view_genre"),
     
     url(r'facebook/test', views.facebook_test),
+
+    url(r'competitions', views.list_competitions, name="competitions"),
 )
 
 #Use django to serve static files during development

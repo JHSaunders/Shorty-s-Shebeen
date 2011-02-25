@@ -11,14 +11,11 @@ function()
 {
     $('.expand-button').click(
     function()
-    {        
-
+    {
         if($(this).parent().parent().hasClass('menu-item-contracted'))
         {
             $(this).parent().parent().removeClass('menu-item-contracted').addClass('menu-item-expanded');
-        }
-        else
-        {   
+        } else {
             $(this).parent().parent().removeClass('menu-item-expanded').addClass('menu-item-contracted');
         }
     }
