@@ -108,8 +108,8 @@ class Competition(models.Model):
     date = models.DateField()
     active = models.BooleanField()
     judged = models.BooleanField()
-    winner = models.ForeignKey(Story)
-    result = models.TextField()
+    winner = models.ForeignKey(Story,null=True)
+    result = models.TextField(blank=True)
 
 class CompetitionEntry(models.Model):
     competition = models.ForeignKey(Competition)
