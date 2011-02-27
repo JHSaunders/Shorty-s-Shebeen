@@ -32,11 +32,20 @@ def home(req):
             '((100/%s*rating_score/(rating_votes+%s))+100)/2' % 
             (Story.rating.range, Story.rating.weight)}).order_by('-rating_scorex')
 
-    context["random_story"] = Story.published_stories.order_by('?')[0]
+    try:
+        context["random_story"] = Story.published_stories.order_by('?')[0]
+    except:
+        context["random_story"] = None
+        
+    try:
+        context["winner_story"] = Competition.objects.filter(judged=True).order_by('-date')[0].winner
+    except:
+        context["winner_story"] = None
     
-    context["winner_story"] = Competition.objects.filter(judged=True).order_by('-date')[0].winner
-    
-    context["shortys_story"] = Story.published_stories.order_by('?')[0] 
+    try:
+        context["shortys_story"] = Story.published_stories.order_by('?')[0] 
+    except:
+        context["shortys_story"] = None
     
     context["genres"] = Genre.objects.all()
     

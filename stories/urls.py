@@ -33,7 +33,7 @@ urlpatterns = patterns('',
     
     url(r'facebook/test', views.facebook_test),
 
-    url(r'competitions', views.list_competitions, name="competitions"),
+    url(r'^competitions', views.list_competitions, name="competitions"),
 )
 
 #Use django to serve static files during development

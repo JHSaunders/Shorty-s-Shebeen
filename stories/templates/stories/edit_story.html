@@ -1,17 +1,62 @@
 {% extends "stories/sidebar_page.html" %}
 {% load markup %}
+{%block scripts%}
+    {{block.super}}
+    <script type="text/javascript" src="/media/js/markitup/jquery.markitup.js"></script>
+    <script type="text/javascript" src="/media/js/markitup/sets/markdown/set.js"></script>
+    <script type="text/javascript" >
+   $(document).ready(function() {
+      $("#id_text").markItUp(mySettings);
+   });
+    </script>
+
+{% endblock %}
+
 {%block style%}
     {{block.super}}
     <link rel="stylesheet" href="/media/css/editor.css"/>
+    <link rel="stylesheet" type="text/css" href="/media/js/markitup/skins/markitup/style.css" />
+    <link rel="stylesheet" type="text/css" href="/media/js/markitup/sets/markdown/style.css" />
 {% endblock %}
 
 {%block title%}Editing{%endblock%}
 {% block content %}
 <form action="" method="post">{% csrf_token %}
-<table id="story_editor">
-{{form}}
-</table>
-<input type="submit" value="Submit Changes" />
+{{ form.non_field_errors }}
+<div id="story_editor">
+<div>
+<label for="id_title">Title</label>{{ form.title.errors }}{{form.title}}
+</div>
+
+<div>
+{{form.text.errors}}
+{{form.text}}
+</div>
+
+<div>
+<label for="id_description">Description (this is optional, but we encourage it)</label>
+{{form.description.errors}}
+{{form.description}}
+</div>
+
+<div>
+<label for="id_genre">Story Genres</label><br/>
+{{form.genre.errors}}
+{{form.genre}}
+</div>
+
+<div>
+<label id="publish_label" for="id_published">Enter this story into a <a href="{% url competitions %}" target="blank">competition</a></label><br/>
+{{form.competitions.errors}}
+{{form.competitions}}
+</div>
+
+<div>
+<label id="publish_label" for="id_published">Publish this story for everyone to read</label>{{form.published}}
+</div>
+
+</div>
+<input type="submit" value="Save Changes" />
 </form>
 <script type="text/javascript">
 //Keeps the title in sync

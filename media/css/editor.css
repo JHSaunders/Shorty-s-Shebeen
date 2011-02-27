@@ -1,13 +1,43 @@
 #story_editor {
     width:100%;
 }
+
+#story_editor label {
+  font-weight:bold;
+  font-size:large;
+  padding-right: 10px;
+}
+
+#story_editor>div {
+    padding-top:10px;
+    padding-bottom:10px;
+}
+
+#id_title {
+    width:50%;
+}
 #id_text {
-    width:95%;
+    width:98%;
     height:600px;
 }
 
-#story_editor input[type="text"]{
-    width:50%;
+#id_description {
+    width:95%;
+    height:100px;
+}
+
+#story_editor ul { 
+    padding:0; 
+    margin:0; 
+}
+
+#story_editor ul li { 
+    list-style-type:none; 
+}
+
+#story_editor ul li label{
+  font-weight:normal;
+  font-size:small;
 }
 
 

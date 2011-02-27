@@ -30,10 +30,6 @@
 {% endfor %}
 <br/>
 {{story.date_published}} ({{comment_count}}&nbsp;comments)
-
-{%ifequal story.author user%}
-<a href="{% url edit_story story.id%}">Edit</a>
-{%endifequal%}
 </p>
 
 </div>

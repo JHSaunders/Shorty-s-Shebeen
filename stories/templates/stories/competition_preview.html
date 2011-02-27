@@ -4,7 +4,9 @@
 <h2 class="title" >{{competition.name}}</h2>
 <h2>Due date: {{competition.date}}</h2>
 <div>
+<img class="competition-image" src="/media/{{competition.image}}" alt="{{competition.name}}"/>
 {{competition.description|markdown}}
+<div class="forced-break"></div>
 </div>
 {% if competition.judged %}
 Winner: <a href="{% url read_story competition.winner.id %}">{{competition.winner}}</a> by <a href="{% url view_author competition.winner.author.id %}">{{competition.winner.author}}</a>

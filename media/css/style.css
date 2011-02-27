@@ -123,6 +123,7 @@ input[type="text"],input[type="password"]{
 .section, #content > .title {
 	background: #1E1E1E url(/media/img/greenback.png) repeat left top;
 	padding: 5px;
+	padding-left: 10px;
 	margin: 5px;
 	-moz-border-radius:8px;
 	-webkit-border-radius:8px;
@@ -130,22 +131,14 @@ input[type="text"],input[type="password"]{
 	-khtml-border-radius:8px;
 	border-radius:8px;
 	box-shadow:0px 0px 4px #04B404;
--webkit-box-shadow:0px 0px 4px #04B404;
--moz-box-shadow: 0px 0px 4px #04B404; 
-}
-
-.section .name , #content > .title{
+    -webkit-box-shadow:0px 0px 4px #04B404;
+    -moz-box-shadow: 0px 0px 4px #04B404;
 	letter-spacing: -0.5px;
 	color: #3BA20E; 
-	text-shadow:0px 0px 30px #000000;
-	padding-top: 0px;
-	padding-right: 0;
-	padding-bottom: 0;
-	padding-left: 10px;
-	
+    text-shadow:0px 0px 30px #000000;
 }
  
-.section .name a {
+.section  a {
 	border: none;
 	color: #3BA20E;
 
@@ -379,6 +372,26 @@ img.genre-image {
     -webkit-box-shadow:0px 0px 20px #B45F04;
     -moz-box-shadow: 0px 0px 20px #B45F04;
 }
+
+/* Genre Pages*/
+img.competition-image {
+    margin:10px 10px;
+    margin-top:0px;
+    float:right;
+	-moz-border-radius:8px;
+	-webkit-border-radius:8px;
+	-opera-border-radius:8px;
+	-khtml-border-radius:8px;
+	border-radius:8px;
+	box-shadow:0px 0px 20px #B45F04;
+    -webkit-box-shadow:0px 0px 20px #B45F04;
+    -moz-box-shadow: 0px 0px 20px #B45F04;
+}
+
+.forced-break {
+    clear:both;
+}
+
 /* Footer */
  
 #footer {
