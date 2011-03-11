@@ -11,7 +11,8 @@ urlpatterns = patterns('',
     # Main Stories App
     (r'^', include('shortys_shebeen.stories.urls')),
     
-    url(r'^$', shortys_construction.views.under_construction,name="under_construction"),
+    #Construction Page
+    #url(r'^$', shortys_construction.views.under_construction,name="under_construction"),
     
     # Uncomment the admin/doc line below to enable admin documentation:
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),

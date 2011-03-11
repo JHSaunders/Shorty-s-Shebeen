@@ -26,12 +26,12 @@ class Story(models.Model):
     title = models.CharField(max_length = 100)
 
     text = models.TextField()
-    description = models.TextField()
+    description = models.TextField(blank=True)
     
     created = models.DateTimeField(auto_now_add = True)
     last_updated = models.DateTimeField(auto_now = True)
 
-    genre = models.ManyToManyField('Genre', related_name = 'stories',verbose_name="Genres")
+    genre = models.ManyToManyField('Genre', related_name = 'stories',verbose_name="Genres",blank=True,null=True)
     rating = AnonymousRatingField(range=5,can_change_vote = True, allow_anonymous=True)
     
     published = models.BooleanField(verbose_name="Publish this story")
@@ -49,7 +49,6 @@ class Story(models.Model):
         if self.published ==True and self.date_published == None:
             self.date_published = datetime.datetime.now()
         super(Story, self).save()
-        
     
     @property        
     def preview(self):
@@ -78,8 +77,9 @@ class Story(models.Model):
             first = False
             s=s+g.name
         return s
-    
-popularity.register(Story)
+
+#This is causing way to many issues
+#popularity.register(Story)
     
 class Genre(models.Model):
     name = models.CharField(max_length = 100)
