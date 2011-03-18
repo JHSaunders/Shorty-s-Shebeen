@@ -69,9 +69,11 @@
         -opera-border-radius:8px;
         -khtml-border-radius:8px;
         border-radius:8px;
-	box-shadow: 1px 1px 10px #B45F04;
+		text-shadow:1px 1px 2px #000000;
+		box-shadow: 1px 1px 10px #B45F04;
     -webkit-box-shadow: 1px 1px 10px #B45F04;
     -moz-box-shadow: 1px 1px 10px #B45F04;
+	border: thin outset #DF7401;
 
 	}
 		
