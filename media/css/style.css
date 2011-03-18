@@ -5,7 +5,7 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 12px;
 	color: #1E1E1E;
-	/*background-image: url(/media/img/curtain.jpg);*/ 
+	background-image: url(/media/img/shortstories.jpg); 
 	background-repeat:no-repeat;
 	background-position:center top;
 	background-color: #000;
@@ -21,7 +21,8 @@ h1, h2, h3, h4 {
 }
 
 h1 {
-	font-size: 2em;
+	font-size: 24px;
+	text-indent:5px;
 }
  
 h2 {
@@ -37,8 +38,11 @@ h4 {
 }
  
 p, ul, ol {
-	margin-top: 0;
-	line-height: 110%;
+
+	text-indent:10px;
+	
+	
+
 }
  
 ul, ol {
@@ -57,10 +61,19 @@ a:hover {
 	margin: 0 auto;
   padding: 0;
 	/*background-image: url(/media/img/refnorepeat.jpg);*/
-	background-color: #3c0000; 
-	background-repeat: no-repeat;
+
 }
 
+#flash {
+
+	width: 1417px ;
+	height: 270px ;
+	position:absolute;
+	left: 50%;
+	top: 0px;
+	margin-left: -708px ;
+	
+}
 input[type="text"],input[type="password"]{
     border:1px solid black;
 }
@@ -69,8 +82,9 @@ input[type="text"],input[type="password"]{
 
 #header {
 	width: 960px;
-	height: 250px;
+	height: 275px;
 	margin: 0 auto;
+	margin-bottom::0px;
 }
 
 /* Page structure */
@@ -82,8 +96,11 @@ input[type="text"],input[type="password"]{
 }
 
 #content {
-	margin: 2px;
+	margin-top:0px;
 	padding: 2px;
+	font-size:14px;
+	text-indent:15px;
+
 }
 
 .content_frame_with_side_bar
@@ -95,7 +112,7 @@ input[type="text"],input[type="password"]{
 #sidebar
 {
     float:right;
-    width:190px;
+    width:194px;
 }
 
 .sidebar_frame
@@ -121,21 +138,27 @@ input[type="text"],input[type="password"]{
 
 /* Section Headers */
 .section, #content > .title {
-	background: #1E1E1E url(/media/img/greenback.png) repeat left top;
+	background-image: url(/media/img/greenback2.png), url(/media/img/greenback.png);
+	background-repeat:repeat-y, repeat;
+	background-position: top left, center center;
 	padding: 5px;
 	padding-left: 10px;
 	margin: 5px;
+	margin-top: 0px;
+	margin-bottom:0px;
 	-moz-border-radius:8px;
 	-webkit-border-radius:8px;
 	-opera-border-radius:8px;
 	-khtml-border-radius:8px;
 	border-radius:8px;
-	box-shadow:0px 0px 4px #04B404;
-    -webkit-box-shadow:0px 0px 4px #04B404;
-    -moz-box-shadow: 0px 0px 4px #04B404;
+	box-shadow:1px 1px 10px #030;
+    -webkit-box-shadow:1px 1px 10px #030;
+    -moz-box-shadow: 1px 1px 10px #030;
 	letter-spacing: -0.5px;
 	color: #3BA20E; 
-    text-shadow:0px 0px 30px #000000;
+    text-shadow:1px 1px 2px #000000;
+	border: thin outset  #3BA20E;
+	
 }
  
 .section  a {
@@ -162,16 +185,18 @@ input[type="text"],input[type="password"]{
 	box-shadow:0px 0px 4px #B45F04;
 	-webkit-box-shadow:0px 0px 4px #B45F04;
 	-moz-box-shadow: 0px 0px 4px #B45F04;
+	border: thin outset #DF7401;
 
 }
 
 .story>.title, .content_frame h1.title,.sidebar_frame>h1{
 	
 	letter-spacing: -0.5px;
-	background: #840403 url(/media/img/redback.jpg) repeat left top;
-	background-color: #840403;
+	background-image: url(/media/img/redback3.png), url(/media/img/redback2.png);
+	background-repeat:repeat-y, repeat;
+	background-position: top left, center center;
 	color: #DF7401;
-	text-shadow:0px 0px 20px #000000;
+	text-shadow:1px 1px 2px #000000;
 	padding-top: 5px;
 	padding-right: 0;
 	padding-bottom: 5px;
@@ -181,9 +206,10 @@ input[type="text"],input[type="password"]{
 	-opera-border-radius:8px;
 	-khtml-border-radius:8px;
 	border-radius:8px;
-	box-shadow:0px 0px 20px #B45F04;
-    -webkit-box-shadow:0px 0px 20px #B45F04;
-    -moz-box-shadow: 0px 0px 20px #B45F04;
+	box-shadow: 1px 1px 10px #B45F04;
+    -webkit-box-shadow: 1px 1px 10px #B45F04;
+    -moz-box-shadow: 1px 1px 10px #B45F04;
+	border: thin outset #DF7401;
 }
  
 .story .title a {
@@ -193,22 +219,32 @@ input[type="text"],input[type="password"]{
 
 .story .author {
 	background-image: none;
-	letter-spacing: -0.5px;
+/*	letter-spacing: -0.5px;*/
 	color: #0B610B;
 	padding-top: 5px;
 	padding-right: 0;
-	padding-bottom: 5px;
+/*	padding-bottom: 5px;*/
 	padding-left: 10px;
 	height:auto;
+	margin-top: 3px;
+	margin-bottom: 0px;
+	font-family: Arial, Helvetica, sans-serif;
 }
  
 .story .author a {
 	border: none;
 	color: #0B610B;
+
 }
 
 .story p {
-	padding-left: 10px;
+	padding-left: 2px;
+	margin-left: 5px;
+	margin-right:5px;
+	margin-top: 20;
+	line-height: 110%;
+	font-size:13px;
+	line-height: 1.5em;
 }
 
 .story .meta {

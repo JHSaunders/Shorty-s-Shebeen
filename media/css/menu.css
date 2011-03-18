@@ -1,12 +1,27 @@
 #menu-buffer
 {
   height:35px;
+
 }
 
 #menu
 {
+
   height:29px;
-  background-image: url(/media/img/greyback.png);
+  /*background-image: url(/media/img/greyback.png);*/
+    -moz-border-radius:8px;
+	-webkit-border-radius:8px;
+	-opera-border-radius:8px;
+	-khtml-border-radius:8px;
+	border-radius:8px;
+	box-shadow:1px 1px 2px #999;
+	font-weight:bold;
+	font-family:Georgia, "Times New Roman", Times, serif;
+	font-size:16px;
+
+   /* -webkit-box-shadow:1px 1px 10px #999;
+    -moz-box-shadow: 1px 1px 10px #999;
+	text-shadow:1px 1px 1px #000000;*/
 }
 
 #user-info
@@ -23,7 +38,7 @@
 	#jsddm li, #user-info li
 	{	float: left;
 		list-style: none;
-		font: 16px Tahoma, Arial;
+		
 		cursor:pointer;
 		}
 
@@ -48,15 +63,15 @@
   
 	#jsddm li a:hover, #user-info li a:hover
 	{
-    	background: #840403 url(/media/img/redback.jpg) repeat left top;
+    	background: #840403 url(/media/img/redback3.png) repeat left top;
    		-moz-border-radius:8px;
         -webkit-border-radius:8px;
         -opera-border-radius:8px;
         -khtml-border-radius:8px;
         border-radius:8px;
-        box-shadow:0px 0px 20px #B45F04;
-        -webkit-box-shadow:0px 0px 20px #B45F04;
-        -moz-box-shadow: 0px 0px 20px #B45F04;
+	box-shadow: 1px 1px 10px #B45F04;
+    -webkit-box-shadow: 1px 1px 10px #B45F04;
+    -moz-box-shadow: 1px 1px 10px #B45F04;
 
 	}
 		
