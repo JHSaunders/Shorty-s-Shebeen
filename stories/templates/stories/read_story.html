@@ -20,7 +20,7 @@
 </p>
 
 <div id="story-preview">
-{{object.preview|markdown}}
+{{object.first_paragraph|markdown}}
 
 <script type="text/javascript">
 
@@ -37,20 +37,20 @@ function hide_story()
 }
 
 $(function(){
-    $('#btn-show-story').click(show_story)
-    $('#btn-hide-story').click(hide_story)
+    $('#show-fulltext-bar').click(show_story)
+    $('#hide-fulltext-bar').click(hide_story)
     })
 
 </script>
 
-<div id="story-preview">
+<div id="show-fulltext-bar" class="show-hide-fulltext-bar">
 Read More <img id="btn-show-story" src="/media/img/expand.png" alt="Show Story"/>
 </div>
 </div>
 
 <div id="story-text" class="hidden">
 {{object.text|markdown}}
-<div>
+<div id="hide-fulltext-bar" class="show-hide-fulltext-bar">
 Hide Story <img id="btn-hide-story" src="/media/img/contract.png" alt="Hide Story"/>
 </div>
 </div>
@@ -63,9 +63,8 @@ Hide Story <img id="btn-hide-story" src="/media/img/contract.png" alt="Hide Stor
       addthis:url="http://example.com"
       addthis:title="An Example Title"
       addthis:description="An Example Description"></a>
-{% ifequal user object.author %}
 <a href="{% url download_story object.id%}">Download PDF</a>
-
+{% ifequal user object.author %}
 <a href="{% url edit_story object.id %}">Edit</a>
 {% endifequal %}
 

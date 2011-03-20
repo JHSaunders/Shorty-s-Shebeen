@@ -14,6 +14,7 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+#default for testing
 DATABASES = {
     'default': {
         'ENGINE': 'sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
@@ -103,8 +104,7 @@ INSTALLED_APPS = (
     'django.contrib.markup',
     'django.contrib.comments',
     'registration',
-    'djangoratings',
-    'popularity',
+    'djangoratings'
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -129,19 +129,9 @@ LOGIN_URL = '/accounts/login/'
 
 ACCOUNT_ACTIVATION_DAYS = 7
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-#Import facebook settings from a seperate file that is not in the repository
-#This keeps the secret key secret
+#Import local settings from a seperate file that is not in the repository
 try:
-    import facebook_settings   
-    FACEBOOK_API_KEY = facebook_settings.FACEBOOK_API_KEY
-    FACEBOOK_SECRET_KEY = facebook_settings.FACEBOOK_SECRET_KEY
-    FACEBOOK_INTERNAL = facebook_settings.FACEBOOK_INTERNAL    
+    from local_settings import *
 except:
-    FACEBOOK_API_KEY = '00000000000000000000000000000000'
-    FACEBOOK_SECRET_KEY = '00000000000000000000000000000000'
-    FACEBOOK_INTERNAL = True
-
-
+    pass
 

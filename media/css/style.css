@@ -269,6 +269,10 @@ input[type="text"],input[type="password"]{
 	font-weight:  bold;
 }
 
+.show-hide-fulltext-bar {
+  cursor:pointer;
+}
+
 /* Errors*/
 
 .errornote {

@@ -5,9 +5,35 @@
 Register
 {%endblock%}
 {% block content %}
+Please enter the following details to register. Once you have completed these details a confirmation email will be sent to you. 
+
 <form action="" method="post">{% csrf_token %}
 <table>
-{{form}}
+<tr>
+<th>{{form.username.label}}</th>
+<td>{% if form.username.errors %}
+    <ul class="errorlist">
+    <li>Usernames can only contain letters (A-Z,a-z), numbers(0-9) and underscores (_) with no spaces.</li>
+    </ul>
+    {%endif%}
+    {{form.username}}</td>
+</tr>
+
+<tr>
+<th>{{form.email.label}}</th>
+<td>{{form.email.errors}}{{form.email}}</td>
+</tr>
+
+<tr>
+<th>{{form.password1.label}}</th>
+<td>{{form.password1.errors}}{{form.password1}}</td>
+</tr>
+
+<tr>
+<th>{{form.password2.label}}</th>
+<td>{{form.password2.errors}}{{form.password2}}</td>
+</tr>
+
 </table>
 <input type="submit" value="Register" />
 </form>

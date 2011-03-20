@@ -50,7 +50,7 @@ class Story(models.Model):
             self.date_published = datetime.datetime.now()
         super(Story, self).save()
     
-    @property        
+    @property
     def preview(self):
         if self.description != "":
             return self.description
@@ -62,15 +62,21 @@ class Story(models.Model):
     def short_preview(self):
         if self.description != "":
             return self.description
-            
+        
         preview_size = 200
         end = min(preview_size,len(self.text))
         return self.text[0:end-1].strip()+'...'
     
     @property
-    def genres(self):        
+    def first_paragraph(self):
+        preview_size = 800
+        end = min(preview_size,len(self.text))
+        return self.text[0:end-1].strip()+'...'
+    
+    @property
+    def genres(self):
         first = True
-        s=""        
+        s=""
         for g in self.genre.all():
             if not first:
                 s=s+", "
