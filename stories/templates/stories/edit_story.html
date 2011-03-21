@@ -60,7 +60,7 @@
 </form>
 <script type="text/javascript">
 //Keeps the title in sync
-$("#id_title").keyup(function(){$("#content>h1.title").html($("#id_title").val())})
+$("#id_title").keyup(function(){$("#content>h1.title").html($("#id_title").val()+"&nbsp;")})
 $("#id_title").keyup()
 </script>
 {% endblock %}

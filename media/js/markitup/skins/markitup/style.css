@@ -14,10 +14,10 @@
 .markItUp  {
 	width:100%;
 	margin:5px 0 5px 0;
-	/*border:5px solid #F5F5F5;	*/
+	border:5px solid #F5F5F5;	
 }
 .markItUpContainer  {
-	/*border:1px solid #3C769D;	*/
+	border:1px solid #3C769D;	
 	background:transparent url(images/bg-container.png) repeat-x top left;
 	padding:5px 1px 0px 1px;
 	font:11px Verdana, Arial, Helvetica, sans-serif;
