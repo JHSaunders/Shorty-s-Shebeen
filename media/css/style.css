@@ -334,6 +334,24 @@ div#story-action-box {
   background-color: #deb78c;
 }
 
+div.auth-box {
+  width: 400px;
+  margin-left:auto;
+  margin-right:auto;
+  border: thin outset #DF7401;
+  background-color: #deb78c;
+}
+div.auth-box table , div.auth-box div{
+  margin-left:auto;
+  margin-right:auto;
+  width:300px;
+}
+
+div.auth-box div{
+font-weight:bold;
+text-align:center;
+}
+
 /* Side bar*/
 
 .sidebar_frame ul{

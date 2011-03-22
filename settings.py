@@ -93,7 +93,6 @@ TEMPLATE_DIRS = (
 
 INSTALLED_APPS = (
     'stories',
-    'shortys_construction',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -102,7 +101,6 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     'django.contrib.markup',
-    'django.contrib.comments',
     'registration',
     'djangoratings',
     'disqus'
@@ -111,11 +109,7 @@ INSTALLED_APPS = (
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django.contrib.auth.context_processors.auth',
-    'popularity.context_processors.most_popular',
-    'popularity.context_processors.most_viewed',
-    'popularity.context_processors.recently_viewed',
-    'popularity.context_processors.recently_added',
-    'stories.context_processors.genre_list',
+    'stories.context_processors.genre_list'
 )
 
 AUTHENTICATION_BACKENDS = (
@@ -129,7 +123,7 @@ LOGIN_REDIRECT_URL = '/author/dashboard/'
 LOGIN_URL = '/accounts/login/'
 
 ACCOUNT_ACTIVATION_DAYS = 7
-
+DEFAULT_FROM_EMAIL = "shorty@shortysshebeen.co.za"
 #Import local settings from a seperate file that is not in the repository
 try:
     from local_settings import *

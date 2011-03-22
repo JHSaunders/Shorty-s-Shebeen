@@ -10,8 +10,6 @@ from django.core.urlresolvers import reverse
 from django.template.loader import get_template
 from django.template import Context
 
-from popularity.models import ViewTracker
-
 import simplejson
 import ho.pisa as pisa
 import cStringIO as StringIO
@@ -83,7 +81,6 @@ def read_story(req,story_id):
             qs = Story.objects.all()
         else:
             qs = Story.published_stories.all()
-            ViewTracker.add_view_for(story)
         
         user_rating = story.rating.get_rating_for_user(req.user, req.META['REMOTE_ADDR'])
         story_rating = round(story.rating.get_rating())

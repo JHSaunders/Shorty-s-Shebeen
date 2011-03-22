@@ -3,10 +3,20 @@
 Login
 {%endblock%}
 {% block content %}
+<div class="auth-box">
 <form method="POST">{% csrf_token %}
 <table>
 {{form}}
-</table>
+<tr>
+<th>
 <input type="submit" name="login" value="Login"/>
+</th>
+<td/>
+</tr>
+</table>
+<div>
+or<br/> if you don't have an account yet you can <a href="{% url registration_register %}">register</a>
+</div>
 </form>
+</div>
 {%endblock%}

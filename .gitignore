@@ -2,5 +2,5 @@
 *.pyc
 *.db
 local_settings.py
-/media/images/genres/
-/media/images/competitions/
+media/img/genres/*
+media/img/competitions/*

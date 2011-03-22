@@ -1,6 +1,5 @@
 {% load markup %}
 {% load rating_tags %}
-{% load comments %}
 
 <div class="story">
 <h2 class="title" ><a  href="{% url read_story story.id %}">{{story.title}}</a></h2>
@@ -17,7 +16,6 @@
 {%endif%}
 
 </div>
-{% get_comment_count for story as comment_count  %}
 
 <div class="meta">
 <div>
