@@ -4,6 +4,7 @@ import popularity
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib import admin
+from django.core.urlresolvers import reverse
 
 from djangoratings.fields import AnonymousRatingField
 
@@ -83,9 +84,10 @@ class Story(models.Model):
             first = False
             s=s+g.name
         return s
-
-#This is causing way to many issues
-#popularity.register(Story)
+        
+    def get_absolute_url(self):
+      return reverse('read_story',args=[self.id])
+      
     
 class Genre(models.Model):
     name = models.CharField(max_length = 100)

@@ -19,6 +19,46 @@
 {% endfor %}
 </p>
 
+<div id="story-action-box">
+<table>
+<tr>
+<td colspan="2" >
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+</div>
+<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4d8801b82194fb7d"></script>
+<!-- AddThis Button END -->
+</td>
+</tr>
+<tr>
+<td>Overall Rating:</td>
+<td>{% rating_star_form 5 story_rating "star" True %}</td>
+</tr>
+
+<tr>
+<td>Your Rating:</td>
+<td>{% rating_star_form 5 user_rating "your-rating" False %}</td>
+</tr>
+
+<tr>
+<td colspan="2" ><a href="{% url download_story object.id%}"><img src="/media/img/pdficon_small.gif" alt="PDF"/> Download PDF</a></td>
+</tr>
+
+{% ifequal user object.author %}
+<tr>
+<td colspan="2">
+<a href="{% url edit_story object.id %}">Edit</a>
+</td>
+</tr>
+{% endifequal %}
+</table>
+</div>
+
 <div id="story-preview">
 {{object.first_paragraph|markdown}}
 
@@ -54,30 +94,7 @@ Read More <img id="btn-show-story" src="/media/img/expand.png" alt="Show Story"/
 Hide Story <img id="btn-hide-story" src="/media/img/contract.png" alt="Hide Story"/>
 </div>
 </div>
-
-
-
-
-<a href="http://www.addthis.com/bookmark.php" 
-      class="addthis_button"
-      addthis:url="http://example.com"
-      addthis:title="An Example Title"
-      addthis:description="An Example Description"></a>
-<a href="{% url download_story object.id%}">Download PDF</a>
-{% ifequal user object.author %}
-<a href="{% url edit_story object.id %}">Edit</a>
-{% endifequal %}
-
-<h3>Rating</h3>
-<table>
-<tr>
-<td>Overall Rating:</td>
-<td>{% rating_star_form 5 story_rating "star" True %}</td>
-<tr>
-<td>Your Rating:</td>
-<td>{% rating_star_form 5 user_rating "your-rating" False %}</td>
-</tr>
-</table>
+<hr/>
 
 <script type="text/javascript">
 $(function(){
@@ -93,12 +110,11 @@ $(function(){
 });    
 </script>
 
-<h3>Comments</h3>
-{% render_comment_list for object %}
-<h3>Post a new comment</h3>
-{% if user.is_anonymous %}
-(<a href="{% url auth_login %}?next={{request.path}}">Login</a> to comment using your account)
-{% endif %}
-{% render_comment_form for object %}
-</div>
+{% load disqus_tags %}
+{% disqus_dev %}
+{% set_disqus_identifier object.id %}
+{% set_disqus_title object.title %}
+{% set_disqus_url object.get_absolute_url %}
+{% disqus_show_comments %}
+
 {% endblock %}

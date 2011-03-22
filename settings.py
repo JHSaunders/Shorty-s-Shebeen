@@ -104,7 +104,8 @@ INSTALLED_APPS = (
     'django.contrib.markup',
     'django.contrib.comments',
     'registration',
-    'djangoratings'
+    'djangoratings',
+    'disqus'
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (

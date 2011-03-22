@@ -43,7 +43,8 @@ def home(req):
         context["winner_story"] = None
     
     try:
-        context["shortys_story"] = Story.published_stories.order_by('?')[0] 
+        shorty = User.objects.get(username = "shorty")
+        context["shortys_story"] = Story.published_stories.filter(author=shorty).order_by('-date_published')[0]
     except:
         context["shortys_story"] = None
     
@@ -76,8 +77,7 @@ def create_story(req):
         form = StoryForm()
     return direct_to_template(req,"stories/edit_story.html",{"form":form})
 
-def read_story(req,story_id):        
-        
+def read_story(req,story_id):
         story = Story.objects.get(id = story_id)
         if req.user == story.author:
             qs = Story.objects.all()
@@ -163,10 +163,8 @@ def archive(req,template_name,extra_context={}):
     else:
         queryset = queryset.order_by('-date_published')
         
-
-    
-    years = Story.objects.dates('date_published','year')
-    months = Story.objects.dates('date_published','month')
+    years = Story.published_stories.dates('date_published','year')
+    months = Story.published_stories.dates('date_published','month')
     
     date_filter = {}
     for year in years:
@@ -189,7 +187,9 @@ def view_author(req,author_id):
     return archive(req,"stories/view_author.html",{"author":author_id,"author_obj":author_obj});
     
 def about(req):
-    return direct_to_template(req,"stories/about.html",{})
+    about_title = "About Shorty's Shebeen"
+    about_id = Story.objects.filter(author__username="shorty").filter(title=about_title)[0].id
+    return read_story(req,about_id)
    
 @login_required 
 def edit_profile(req):
