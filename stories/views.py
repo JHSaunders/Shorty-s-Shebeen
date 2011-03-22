@@ -170,7 +170,7 @@ def archive(req,template_name,extra_context={}):
         date_filter[month.year].append(month)
     context["dates"] = date_filter            
     
-    return object_list(req,queryset,template_name=template_name, paginate_by=2, template_object_name="story", extra_context=context)
+    return object_list(req,queryset,template_name=template_name, paginate_by=15, template_object_name="story", extra_context=context)
 
 def story_archive(req):
     return archive(req,"stories/story_archive.html");

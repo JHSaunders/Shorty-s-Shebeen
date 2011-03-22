@@ -6,6 +6,9 @@
 {{block.super}}
 {% endblock%}
 
+{% block pagetitle%}
+{{object.title}} - Shorty's Shebeen
+{% endblock%}
 
 {% block content %}
 <div class="story">
@@ -50,7 +53,7 @@
 {% ifequal user object.author %}
 <tr>
 <td colspan="2">
-<a href="{% url edit_story object.id %}">Edit</a>
+<a href="{% url edit_story object.id %}"><img src="/media/img/pen.png" alt="edit"/>Edit</a>
 </td>
 </tr>
 {% endifequal %}
