@@ -108,6 +108,7 @@ INSTALLED_APPS = (
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
+    'django.core.context_processors.debug',
     'django.contrib.auth.context_processors.auth',
     'stories.context_processors.genre_list'
 )
@@ -121,6 +122,8 @@ AUTH_PROFILE_MODULE = 'stories.AuthorProfile'
 LOGIN_REDIRECT_URL = '/author/dashboard/'
 
 LOGIN_URL = '/accounts/login/'
+
+INTERNAL_IPS = ('0.0.0.0', '127.0.0.1')
 
 ACCOUNT_ACTIVATION_DAYS = 7
 DEFAULT_FROM_EMAIL = "shorty@shortysshebeen.co.za"
