@@ -32,7 +32,7 @@ class Story(models.Model):
     last_updated = models.DateTimeField(auto_now = True)
 
     genre = models.ManyToManyField('Genre', related_name = 'stories',verbose_name="Genres",blank=True,null=True)
-    rating = AnonymousRatingField(range=5,can_change_vote = True, allow_anonymous=True)
+    rating = AnonymousRatingField(range=5,can_change_vote = True, allow_anonymous=True,allow_delete=True)
     
     published = models.BooleanField(verbose_name="Publish this story")
     date_published = models.DateTimeField(editable = False,null=True)

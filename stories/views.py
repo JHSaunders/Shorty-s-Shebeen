@@ -97,8 +97,15 @@ def rate_story(req,story_id):
     else:
         rating = int(rating_str)
     
-    Story.published_stories.get(id=story_id).rating.add(score=rating, user=req.user, ip_address=req.META['REMOTE_ADDR'])
-    return HttpResponse("ok")    
+    try:
+        if rating>0:
+            Story.published_stories.get(id=story_id).rating.add(score=rating, user=req.user, ip_address=req.META['REMOTE_ADDR'])
+        else:
+            Story.published_stories.get(id=story_id).rating.delete(user=req.user, ip_address=req.META['REMOTE_ADDR'])
+    except:
+        return HttpResponse("fail")
+    
+    return HttpResponse("ok")
     
 def render_to_pdf(template_src, context_dict):
     template = get_template(template_src)
