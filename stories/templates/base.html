@@ -21,6 +21,9 @@
     <script type="text/javascript" src="/media/js/jquery.rating.js"></script>
     <script type="text/javascript" src="/media/js/menu.js"></script>
     {%endblock%}
+    <meta name="google-site-verification" content="1clrmSsguiOB_I1JaYnHNo7vEqHcs7oAJRwa1bHr9wM" />
+    <meta name="google-site-verification" content="_FS2D8TWC7frd2ioUk1qKdJR0zgnxqkdkNEcWEIAWWE" />
+    <link rel="shortcut icon" href="/media/img/favicon.ico" />    
     <title>{%block pagetitle %}Shorty's Shebeen - South African Short Stories{% endblock %}</title>
 </head>
 {% endblock %}
@@ -106,8 +109,11 @@
 swfobject.registerObject("FlashID");
 //-->
 </script>
-<script type="text/javascript">
 
+
+{% if debug %}
+{% else %}
+<script type="text/javascript">
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-2959473-2']);
   _gaq.push(['_trackPageview']);
@@ -117,8 +123,9 @@ swfobject.registerObject("FlashID");
     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
-
 </script>
+{% endif %}
+
 {% endblock %}
 </body>
 </html>

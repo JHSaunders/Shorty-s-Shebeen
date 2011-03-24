@@ -27,6 +27,11 @@
     height:100px;
 }
 
+#id_published {
+    height:2em;
+    width:2em;
+}
+
 #story_editor ul { 
     padding:0; 
     margin:0; 

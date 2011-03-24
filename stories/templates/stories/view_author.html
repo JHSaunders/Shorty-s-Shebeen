@@ -7,8 +7,23 @@
 {%block info_frame%}
 <div id="sidebar" class = "sidebar_frame">
 <h1 class="name">Author Profile</h1>
-<p>
+<ul>
+<li>
 {{author_obj.get_profile.about}}
-</p>
+</li>
+
+{% if author_obj.get_profile.blog %}
+<li>
+  <strong>Blog:</strong> <a href="{{author_obj.get_profile.blog}}">{{author_obj.get_profile.blog}}</a>
+</li>
+{% endif %} 
+
+{% if author_obj.get_profile.website %}
+<li>
+  <strong>Website:</strong> <a href="{{author_obj.get_profile.website}}">{{author_obj.get_profile.website}}</a>
+</li>
+{% endif %} 
+</ul>
+
 </div>
 {%endblock%}

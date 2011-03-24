@@ -18,16 +18,22 @@ import cgi
 from models import *
 from forms import *
 
+# This is the ratings forumla for finding the top rated stories
+# It balances teh absolute rating against teh amount of votes cast, so a 
+# story with one vote of 5/5 wont automatically go to the top
+# May want to put in some sort of exponential decay
+rating_formula = '((100/%s*rating_score/(rating_votes+%s))+10)/2'
+
 def test(req):
     return HttpResponse("Hello world")
 
-def home(req):    
+def home(req):
     context = {}
 
     num_stories = 10
     context["latest"] = Story.published_stories.order_by('-date_published')[:num_stories]    
     context["top_rated"] = Story.published_stories.extra(select={'rating_scorex': 
-            '((100/%s*rating_score/(rating_votes+%s))+100)/2' % 
+            rating_formula % 
             (Story.rating.range, Story.rating.weight)}).order_by('-rating_scorex')
 
     try:
@@ -97,8 +103,15 @@ def rate_story(req,story_id):
     else:
         rating = int(rating_str)
     
-    Story.published_stories.get(id=story_id).rating.add(score=rating, user=req.user, ip_address=req.META['REMOTE_ADDR'])
-    return HttpResponse("ok")    
+    try:
+        if rating>0:
+            Story.published_stories.get(id=story_id).rating.add(score=rating, user=req.user, ip_address=req.META['REMOTE_ADDR'])
+        else:
+            Story.published_stories.get(id=story_id).rating.delete(user=req.user, ip_address=req.META['REMOTE_ADDR'])
+    except:
+        return HttpResponse("fail")
+    
+    return HttpResponse("ok")
     
 def render_to_pdf(template_src, context_dict):
     template = get_template(template_src)
@@ -154,7 +167,7 @@ def archive(req,template_name,extra_context={}):
     
     if order=="order_rating":
         queryset = queryset.extra(select={'rating_scorex':
-            '((100/%s*rating_score/(rating_votes+%s))+100)/2' % 
+            rating_formula % 
             (Story.rating.range, Story.rating.weight)})
         queryset = queryset.order_by('-rating_scorex')
     else:
@@ -170,7 +183,7 @@ def archive(req,template_name,extra_context={}):
         date_filter[month.year].append(month)
     context["dates"] = date_filter            
     
-    return object_list(req,queryset,template_name=template_name, paginate_by=2, template_object_name="story", extra_context=context)
+    return object_list(req,queryset,template_name=template_name, paginate_by=15, template_object_name="story", extra_context=context)
 
 def story_archive(req):
     return archive(req,"stories/story_archive.html");
