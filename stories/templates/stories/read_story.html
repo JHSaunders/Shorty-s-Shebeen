@@ -2,9 +2,6 @@
 
 {% load rating_tags %}
 {% load markup %}
-{% block scripts%}
-{{block.super}}
-{% endblock%}
 
 {% block pagetitle%}
 {{object.title}} - Shorty's Shebeen
@@ -59,43 +56,19 @@
 {% endifequal %}
 </table>
 </div>
-
-<div id="story-preview">
-{{object.first_paragraph|markdown}}
-
-<script type="text/javascript">
-
-function show_story()
-{
-    $('#story-preview').addClass('hidden')   
-    $('#story-text').removeClass('hidden')
-}
-
-function hide_story()
-{
-    $('#story-preview').removeClass('hidden')   
-    $('#story-text').addClass('hidden')
-}
-
-$(function(){
-    $('#show-fulltext-bar').click(show_story)
-    $('#hide-fulltext-bar').click(hide_story)
-    })
-
-</script>
-
-<div id="show-fulltext-bar" class="show-hide-fulltext-bar">
-Read More <img id="btn-show-story" src="/media/img/expand.png" alt="Show Story"/>
-</div>
-</div>
-
-<div id="story-text" class="hidden">
+<div id="story-text">
 {{object.text|markdown}}
-<div id="hide-fulltext-bar" class="show-hide-fulltext-bar">
-Hide Story <img id="btn-hide-story" src="/media/img/contract.png" alt="Hide Story"/>
-</div>
 </div>
 <hr/>
+<div class="comment-wrapper">
+<h2>Comments</h2>
+{% load disqus_tags %}
+{% disqus_dev %}
+{% set_disqus_identifier object.id %}
+{% set_disqus_title object.title %}
+{% set_disqus_url object.get_absolute_url %}
+{% disqus_show_comments %}
+</div>
 
 <script type="text/javascript">
 $(function(){
@@ -111,11 +84,5 @@ $(function(){
 });    
 </script>
 
-{% load disqus_tags %}
-{% disqus_dev %}
-{% set_disqus_identifier object.id %}
-{% set_disqus_title object.title %}
-{% set_disqus_url object.get_absolute_url %}
-{% disqus_show_comments %}
 
 {% endblock %}

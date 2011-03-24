@@ -4,6 +4,10 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib import admin
 from django.core.urlresolvers import reverse
+from django.utils.safestring import mark_safe 
+
+from markdown import markdown
+from BeautifulSoup import BeautifulSoup
 
 from djangoratings.fields import AnonymousRatingField
 
@@ -50,29 +54,22 @@ class Story(models.Model):
             self.date_published = datetime.datetime.now()
         super(Story, self).save()
     
-    @property
-    def preview(self):
+    def get_preview(self,preview_size):
         if self.description != "":
             return self.description
-        preview_size = 800
-        end = min(preview_size,len(self.text))
-        return self.text[0:end-1].strip()+'...'
+        html = markdown(self.text)
+        text = ''.join(BeautifulSoup(html).findAll(text=True))
+        return text[:preview_size]+"..."
+
+    @property
+    def preview(self):
+
+        return self.get_preview(400)
     
     @property       
     def short_preview(self):
-        if self.description != "":
-            return self.description
-        
-        preview_size = 200
-        end = min(preview_size,len(self.text))
-        return self.text[0:end-1].strip()+'...'
-    
-    @property
-    def first_paragraph(self):
-        preview_size = 800
-        end = min(preview_size,len(self.text))
-        return self.text[0:end-1].strip()+'...'
-    
+        return self.get_preview(200)
+
     @property
     def genres(self):
         first = True

@@ -127,6 +127,10 @@ INTERNAL_IPS = ('0.0.0.0', '127.0.0.1')
 
 ACCOUNT_ACTIVATION_DAYS = 7
 DEFAULT_FROM_EMAIL = "shorty@shortysshebeen.co.za"
+
+DISQUS_API_KEY = '0sDLt49vHkO2sxgZ9JJuGhChl2ty45X7rGolW2LAdlr5CgG3R239vteRF91EIaeb'
+DISQUS_WEBSITE_SHORTNAME = 'shortysshebeendebug'
+
 #Import local settings from a seperate file that is not in the repository
 try:
     from local_settings import *
