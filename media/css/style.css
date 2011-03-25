@@ -138,9 +138,14 @@ input[type="text"],input[type="password"]{
 
 /* Section Headers */
 .section, #content > .title {
+	background-image: url(/media/img/greenback_clean.png);
+	background-repeat:repeat-y;
+	background-position: top left;
+	/*
 	background-image: url(/media/img/greenback2.png), url(/media/img/greenback.png);
 	background-repeat:repeat-y, repeat;
 	background-position: top left, center center;
+	*/
 	padding: 5px;
 	padding-left: 10px;
 	margin: 5px;
@@ -194,9 +199,12 @@ input[type="text"],input[type="password"]{
 .story>.title, .content_frame h1.title,.sidebar_frame>h1{
 	
 	letter-spacing: -0.5px;
-	background-image: url(/media/img/redback3.png), url(/media/img/redback2.png);
+	/*background-image: url(/media/img/redback3.png), url(/media/img/redback2.png);
 	background-repeat:repeat-y, repeat;
-	background-position: top left, center center;
+	background-position: top left, center center;*/
+	background-image: url(/media/img/redback_clean.png);
+	background-repeat:repeat-y;
+	background-position: top left;
 	color: #DF7401;
 	text-shadow:1px 1px 2px #000000;
 	padding-top: 5px;
