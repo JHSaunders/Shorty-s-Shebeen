@@ -50,7 +50,7 @@ USE_I18N = True
 USE_L10N = True
 
 #The Space home, usefulfor development
-SPACE_HOME = os.environ['PWD']
+SPACE_HOME = os.path.dirname(__file__)
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
