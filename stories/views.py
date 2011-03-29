@@ -1,5 +1,6 @@
 import datetime
 
+from django.db.models import Q
 from django.http import *
 from django.contrib.auth.decorators import login_required,user_passes_test
 from django.views.generic.simple import direct_to_template
@@ -86,7 +87,7 @@ def read_story(req,story_id):
         if req.user == story.author:
             qs = Story.objects.all()
         else:
-            qs = Story.published_stories.all()
+            qs = Story.objects.filter(Q(published=True) | Q(hidden=True) )
         
         user_rating = story.rating.get_rating_for_user(req.user, req.META['REMOTE_ADDR'])
         story_rating = round(story.rating.get_rating())

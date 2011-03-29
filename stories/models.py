@@ -46,6 +46,8 @@ class Story(models.Model):
     
     competitions = models.ManyToManyField('Competition',related_name='competitions',blank=True,null=True)
     
+    hidden = models.BooleanField(verbose_name="Make this a hidden story",blank=True,default=False)
+    
     def __unicode__(self):
         return self.title   
     
