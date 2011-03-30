@@ -1,4 +1,3 @@
-
 body {
 	margin: 0;
 	padding: 0;
@@ -109,7 +108,7 @@ input[type="text"],input[type="password"]{
     float:left;
 }
 
-#sidebar
+#sidebar 
 {
     float:right;
     width:200px;
@@ -124,11 +123,11 @@ input[type="text"],input[type="password"]{
 /* Home page */
 .home_column {
 	padding: 0px;
-	width: 375px;
+	width: 32.3%;
 	margin-top: 0px;
-	margin-right: 2px;
+	margin-right: 0.5%;
 	margin-bottom: 2px;
-	margin-left: 0px;
+	margin-left: 0.5%;
 	float:left;
 }
 
@@ -342,6 +341,11 @@ hr {
   clear:both;
 }
 
+hr.invisible{
+  clear:both;
+  border: 0px outset #DF7401;
+}
+
 .show-hide-fulltext-bar {
   cursor:pointer;
   font-weight:bold;
@@ -428,6 +432,20 @@ li.menu-item-contracted .contract-button {
 }
 
 /* Comments */
+
+.action-wrapper{
+  width:30%;
+  float:right;
+}
+
+.action-wrapper h1, .action-wrapper h2, .action-wrapper h3 {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.comment-wrapper{
+  width:69%;
+  float:left;
+}
 
 .comment-wrapper h1, .comment-wrapper h2, .comment-wrapper h3{
     font-family: Arial, Helvetica, sans-serif;

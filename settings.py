@@ -49,7 +49,7 @@ USE_I18N = True
 # calendars according to the current locale
 USE_L10N = True
 
-#The Space home, usefulfor development
+#The Space home, useful for development
 SPACE_HOME = os.path.dirname(__file__)
 
 # Absolute path to the directory that holds media.

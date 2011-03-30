@@ -10,19 +10,29 @@
 {% block content %}
 <div class="story">
 <h2 class="title"><a>{{object.title}}</a></h2>
-<p class="author">by <a href="{% url view_author object.author.id%}">{{object.author}}</a></p>
+<p class="author">by <a href="{% url view_author object.author.id%}">{{object.author}}</a>
+{% ifequal user object.author %}
+(<a href="{% url edit_story object.id %}"><img src="/media/img/pen.png" alt="edit"/>Edit</a>)
+{% endifequal %}
+</p>
 <p>
 {% for genre in object.genre.all %}
 <a href="{% url view_genre genre.id %}">{{genre}}</a>{%if not forloop.last %}, {%endif%}
 {% endfor %}
 </p>
 
-<div id="story-action-box">
-<table>
-<tr>
-<td colspan="2" >
+<div id="story-text">
+{{object.text|markdown}}
+</div>
+<hr/>
+
+
+<div class="action-wrapper">
+<h2 style="float:left">Rate:</h2> {% rating_star_form 5 user_rating "your-rating" False %}
+<hr class="invisible"/>
 <!-- AddThis Button BEGIN -->
 <div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+<h2 style="float:left">Share:</h2>
 <a class="addthis_button_preferred_1"></a>
 <a class="addthis_button_preferred_2"></a>
 <a class="addthis_button_preferred_3"></a>
@@ -30,36 +40,15 @@
 <a class="addthis_button_compact"></a>
 </div>
 <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4d8801b82194fb7d"></script>
+<style type="text/css">
+.atclear { clear:none; !important; }
+</style>
 <!-- AddThis Button END -->
-</td>
-</tr>
-<tr>
-<td>Overall Rating:</td>
-<td>{% rating_star_form 5 story_rating "star" True %}</td>
-</tr>
 
-<tr>
-<td>Your Rating:</td>
-<td>{% rating_star_form 5 user_rating "your-rating" False %}</td>
-</tr>
-
-<tr>
-<td colspan="2" ><a href="{% url download_story object.id%}"><img src="/media/img/pdficon_small.gif" alt="PDF"/> Download PDF</a></td>
-</tr>
-
-{% ifequal user object.author %}
-<tr>
-<td colspan="2">
-<a href="{% url edit_story object.id %}"><img src="/media/img/pen.png" alt="edit"/>Edit</a>
-</td>
-</tr>
-{% endifequal %}
-</table>
+<hr class="invisible"/>
+<h2 style="float:left">Download: <a href="{% url download_story object.id%}"><img src="/media/img/PDF_icon_32x32.gif" alt="PDF"/></a></h2>
 </div>
-<div id="story-text">
-{{object.text|markdown}}
-</div>
-<hr/>
+
 <div class="comment-wrapper">
 <h2>Comments</h2>
 {% load disqus_tags %}
@@ -83,6 +72,6 @@ $(function(){
      });
 });    
 </script>
-
+<div class="force-clear"/>
 
 {% endblock %}

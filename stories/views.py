@@ -24,23 +24,24 @@ from forms import *
 # story with one vote of 5/5 wont automatically go to the top
 # May want to put in some sort of exponential decay
 rating_formula = '((100/%s*rating_score/(rating_votes+%s))+10)/2'
+num_stories_in_list = 10
+num_random_stories = num_stories_in_list/2
 
 def test(req):
     return HttpResponse("Hello world")
 
 def home(req):
     context = {}
-
-    num_stories = 10
-    context["latest"] = Story.published_stories.order_by('-date_published')[:num_stories]    
+    
+    context["latest"] = Story.published_stories.order_by('-date_published')[:num_stories_in_list]    
     context["top_rated"] = Story.published_stories.extra(select={'rating_scorex': 
             rating_formula % 
-            (Story.rating.range, Story.rating.weight)}).order_by('-rating_scorex')
+            (Story.rating.range, Story.rating.weight)}).order_by('-rating_scorex')[:num_stories_in_list]
 
     try:
-        context["random_story"] = Story.published_stories.order_by('?')[0]
+        context["random_stories"] = Story.published_stories.order_by('?')[:num_random_stories]
     except:
-        context["random_story"] = None
+        context["random_stories"] = None
         
     try:
         context["winner_story"] = Competition.objects.filter(judged=True).order_by('-date')[0].winner
@@ -52,16 +53,20 @@ def home(req):
         context["shortys_story"] = Story.published_stories.filter(author=shorty).order_by('-date_published')[0]
     except:
         context["shortys_story"] = None
-    
+
+    try:
+        context["latest_competitions"] = Competition.objects.filter(active=True);
+    except:
+        context["latest_competitions"] = None
+
     context["genres"] = Genre.objects.all()
     
     return direct_to_template(req,"stories/home.html",context)
 
 def random_story(req):
     context = {}
-    context["story"]=Story.published_stories.order_by('?')[0]
-    context["do_short_preview"]=True
-    return direct_to_template(req,"stories/story_preview.html",context)
+    context["story_list"]=Story.published_stories.order_by('?')[:num_random_stories]
+    return direct_to_template(req,"stories/story_list.html",context)
 
 @login_required
 def edit_story(req,story_id):
@@ -98,6 +103,9 @@ def read_story(req,story_id):
         return object_detail(req,qs,story_id,template_name="stories/read_story.html",extra_context=extra_context)
 
 def rate_story(req,story_id):
+    if "rating" not in req.GET:
+        return HttpResponse("fail")
+    
     rating_str = req.GET["rating"]
     if rating_str == "undefined":
         rating = 0
