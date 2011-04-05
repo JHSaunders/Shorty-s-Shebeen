@@ -110,7 +110,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django.core.context_processors.debug',
     'django.contrib.auth.context_processors.auth',
-    'stories.context_processors.genre_list'
+    'stories.context_processors.genre_list',
+    'stories.context_processors.detect_user_agent'
 )
 
 AUTHENTICATION_BACKENDS = (

@@ -36,6 +36,11 @@
 
 <div id="header">
 <div id="flash">
+{% if user_agent_is_mac %}
+<div>
+  <img src="/media/img/shortstories2.jpg"  width="1418" height="270" alt=""/>
+</div>
+{% else %}
 <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="1418" height="270" id="FlashID" title="Shorty's Short Story Shebeen">
   <param name="movie" value="/media/flash/flame_effect3.swf" />
   <param name="quality" value="high" />
@@ -56,6 +61,7 @@
   </object>
   <!--<![endif]-->
 </object>
+{% endif %}
 </div>
 </div>
 
