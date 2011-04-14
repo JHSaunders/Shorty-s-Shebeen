@@ -9,7 +9,7 @@
 $(document).ready(
 function()
 {
-    $('.expand-button').click(
+    $('.expand-contract-button').click(
     function()
     {
         if($(this).parent().parent().hasClass('menu-item-contracted'))
@@ -65,8 +65,10 @@ Archive
     {% for dyear, months in dates.items %}
     <li {%ifnotequal year dyear %}class="menu-item-contracted"{%else%}class="menu-item-expanded"{%endifnotequal%}> 
         <span {%ifequal year dyear %}class="menu-item-selected"{%endifequal%} ><a href="{{request.path}}{% query_string 'year=dyear' 'year,month,page'%}">
-            {{dyear}}</a><img class="expand-button"/></span>
-        
+            {{dyear}}</a>
+            <img src="/media/img/expand.png" class="contract-button expand-contract-button"/>
+            <img src="/media/img/contract.png" class="expand-button expand-contract-button"/>
+            </span>
         <ul>
         {% for dmonth in months%}
             <li>
@@ -79,15 +81,7 @@ Archive
         </li>    
     {% endfor %}
     </ul>
-    <!--
-    <h3>Search:</h3>
-    <form action = "{% url story_archive%}" method="GET">
-        <input type="text" name="search" value="{{request.GET.search}}"/>
-        <input type="submit" name="submit" value="Search">
-        <a href="{% url story_archive%}{% query_string '' 'search,submit,page'%}">Clear Search</a>
-        {% query_string_as_hiddens '' 'search,page,submit'%}
-    </form>
-    -->
+    
     <h3>Order by:</h3>
     <ul class="filter-menu">
     

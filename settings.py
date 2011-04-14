@@ -14,6 +14,7 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+#default for testing
 DATABASES = {
     'default': {
         'ENGINE': 'sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
@@ -48,8 +49,8 @@ USE_I18N = True
 # calendars according to the current locale
 USE_L10N = True
 
-#The Space home, usefulfor development
-SPACE_HOME = os.environ['PWD']
+#The Space home, useful for development
+SPACE_HOME = os.path.dirname(__file__)
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
@@ -92,7 +93,6 @@ TEMPLATE_DIRS = (
 
 INSTALLED_APPS = (
     'stories',
-    'shortys_construction',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -101,20 +101,17 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     'django.contrib.markup',
-    'django.contrib.comments',
     'registration',
     'djangoratings',
-    'popularity',
+    'disqus'
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
+    'django.core.context_processors.debug',
     'django.contrib.auth.context_processors.auth',
-    'popularity.context_processors.most_popular',
-    'popularity.context_processors.most_viewed',
-    'popularity.context_processors.recently_viewed',
-    'popularity.context_processors.recently_added',
     'stories.context_processors.genre_list',
+    'stories.context_processors.detect_user_agent'
 )
 
 AUTHENTICATION_BACKENDS = (
@@ -127,21 +124,17 @@ LOGIN_REDIRECT_URL = '/author/dashboard/'
 
 LOGIN_URL = '/accounts/login/'
 
+INTERNAL_IPS = ('0.0.0.0', '127.0.0.1')
+
 ACCOUNT_ACTIVATION_DAYS = 7
+DEFAULT_FROM_EMAIL = "shorty@shortysshebeen.co.za"
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+DISQUS_API_KEY = '0sDLt49vHkO2sxgZ9JJuGhChl2ty45X7rGolW2LAdlr5CgG3R239vteRF91EIaeb'
+DISQUS_WEBSITE_SHORTNAME = 'shortysshebeendebug'
 
-#Import facebook settings from a seperate file that is not in the repository
-#This keeps the secret key secret
+#Import local settings from a seperate file that is not in the repository
 try:
-    import facebook_settings   
-    FACEBOOK_API_KEY = facebook_settings.FACEBOOK_API_KEY
-    FACEBOOK_SECRET_KEY = facebook_settings.FACEBOOK_SECRET_KEY
-    FACEBOOK_INTERNAL = facebook_settings.FACEBOOK_INTERNAL    
+    from local_settings import *
 except:
-    FACEBOOK_API_KEY = '00000000000000000000000000000000'
-    FACEBOOK_SECRET_KEY = '00000000000000000000000000000000'
-    FACEBOOK_INTERNAL = True
-
-
+    pass
 

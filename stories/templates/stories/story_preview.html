@@ -1,6 +1,5 @@
 {% load markup %}
 {% load rating_tags %}
-{% load comments %}
 
 <div class="story">
 <h2 class="title" ><a  href="{% url read_story story.id %}">{{story.title}}</a></h2>
@@ -11,26 +10,31 @@
 <div>
 
 {%if do_short_preview %}
-{{story.short_preview|markdown}}
+<p>
+{{story.short_preview}}
+</p>
 {%else%}
-{{story.preview|markdown}}
+<p>{{story.preview}}</p>
 {%endif%}
 
 </div>
 
-{% get_comment_count for story as comment_count  %}
-
 <div class="meta">
-<p>{% rating_star_form 5 story.rating.get_rating "star" True %}</p>
-<p>&nbsp;</p>
-
-<p>
+<div>
 {% for genre in story.genre.all %}
 <a href="{% url view_genre genre.id %}">{{genre}}</a>{%if not forloop.last %}, {%endif%}
 {% endfor %}
-<br/>
-{{story.date_published}} ({{comment_count}}&nbsp;comments)
-</p>
+</div>
+<div>
+{% rating_star_form 5 story.rating.get_rating "star" True %}
+</div>
+
+<div style="clear:both">
+{{story.date_published}} 
+(<a href="{{ story.get_absolute_url }}#disqus_thread" data-disqus-identifier="{{ story.id }}">View Comments</a>)
+{% load disqus_tags %}
+{% disqus_num_replies %}
+</div>
 
 </div>
 

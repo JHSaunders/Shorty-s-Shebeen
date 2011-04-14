@@ -1,84 +1,63 @@
 {% extends "base.html" %}
 
-{% load comments %}
 {% load rating_tags %}
 {% load markup %}
-{% block scripts%}
-{{block.super}}
-<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js"></script>
-{% endblock%}
 
+{% block pagetitle%}
+{{object.title}} - Shorty's Shebeen
+{% endblock%}
 
 {% block content %}
 <div class="story">
 <h2 class="title"><a>{{object.title}}</a></h2>
-<p class="author">by <a href="{% url view_author object.author.id%}">{{object.author}}</a></p>
+<p class="author">by <a href="{% url view_author object.author.id%}">{{object.author}}</a>
+{% ifequal user object.author %}
+(<a href="{% url edit_story object.id %}"><img src="/media/img/pen.png" alt="edit"/>Edit</a>)
+{% endifequal %}
+</p>
 <p>
 {% for genre in object.genre.all %}
 <a href="{% url view_genre genre.id %}">{{genre}}</a>{%if not forloop.last %}, {%endif%}
 {% endfor %}
 </p>
 
-<div id="story-preview">
-{{object.preview|markdown}}
-
-<script type="text/javascript">
-
-function show_story()
-{
-    $('#story-preview').addClass('hidden')   
-    $('#story-text').removeClass('hidden')
-}
-
-function hide_story()
-{
-    $('#story-preview').removeClass('hidden')   
-    $('#story-text').addClass('hidden')
-}
-
-$(function(){
-    $('#btn-show-story').click(show_story)
-    $('#btn-hide-story').click(hide_story)
-    })
-
-</script>
-
-<div id="story-preview">
-Read More <img id="btn-show-story" src="/media/img/expand.png" alt="Show Story"/>
-</div>
-</div>
-
-<div id="story-text" class="hidden">
+<div id="story-text">
 {{object.text|markdown}}
-<div>
-Hide Story <img id="btn-hide-story" src="/media/img/contract.png" alt="Hide Story"/>
 </div>
+<hr/>
+
+
+<div class="action-wrapper">
+<h2 style="float:left">Rate:</h2> {% rating_star_form 5 user_rating "your-rating" False %}
+<hr class="invisible"/>
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+<h2 style="float:left">Share:</h2>
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+</div>
+<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4d8801b82194fb7d"></script>
+<style type="text/css">
+.atclear { clear:none; !important; }
+</style>
+<!-- AddThis Button END -->
+
+<hr class="invisible"/>
+<h2 style="float:left">Download: <a href="{% url download_story object.id%}"><img src="/media/img/PDF_icon_32x32.gif" alt="PDF"/></a></h2>
 </div>
 
-
-
-
-<a href="http://www.addthis.com/bookmark.php" 
-      class="addthis_button"
-      addthis:url="http://example.com"
-      addthis:title="An Example Title"
-      addthis:description="An Example Description"></a>
-{% ifequal user object.author %}
-<a href="{% url download_story object.id%}">Download PDF</a>
-
-<a href="{% url edit_story object.id %}">Edit</a>
-{% endifequal %}
-
-<h3>Rating</h3>
-<table>
-<tr>
-<td>Overall Rating:</td>
-<td>{% rating_star_form 5 story_rating "star" True %}</td>
-<tr>
-<td>Your Rating:</td>
-<td>{% rating_star_form 5 user_rating "your-rating" False %}</td>
-</tr>
-</table>
+<div class="comment-wrapper">
+<h2>Comments</h2>
+{% load disqus_tags %}
+{% disqus_dev %}
+{% set_disqus_identifier object.id %}
+{% set_disqus_title object.title %}
+{% set_disqus_url object.get_absolute_url %}
+{% disqus_show_comments %}
+</div>
 
 <script type="text/javascript">
 $(function(){
@@ -93,13 +72,6 @@ $(function(){
      });
 });    
 </script>
+<div class="force-clear"/>
 
-<h3>Comments</h3>
-{% render_comment_list for object %}
-<h3>Post a new comment</h3>
-{% if user.is_anonymous %}
-(<a href="{% url auth_login %}?next={{request.path}}">Login</a> to comment using your account)
-{% endif %}
-{% render_comment_form for object %}
-</div>
 {% endblock %}

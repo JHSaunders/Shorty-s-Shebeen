@@ -1,5 +1,6 @@
 import datetime
 
+from django.db.models import Q
 from django.http import *
 from django.contrib.auth.decorators import login_required,user_passes_test
 from django.views.generic.simple import direct_to_template
@@ -10,8 +11,6 @@ from django.core.urlresolvers import reverse
 from django.template.loader import get_template
 from django.template import Context
 
-from popularity.models import ViewTracker
-
 import simplejson
 import ho.pisa as pisa
 import cStringIO as StringIO
@@ -20,22 +19,29 @@ import cgi
 from models import *
 from forms import *
 
+# This is the ratings forumla for finding the top rated stories
+# It balances teh absolute rating against teh amount of votes cast, so a 
+# story with one vote of 5/5 wont automatically go to the top
+# May want to put in some sort of exponential decay
+rating_formula = '((100/%s*rating_score/(rating_votes+%s))+10)/2'
+num_stories_in_list = 10
+num_random_stories = num_stories_in_list/2
+
 def test(req):
     return HttpResponse("Hello world")
 
-def home(req):    
+def home(req):
     context = {}
-
-    num_stories = 10
-    context["latest"] = Story.published_stories.order_by('-date_published')[:num_stories]    
+    
+    context["latest"] = Story.published_stories.order_by('-date_published')[:num_stories_in_list]    
     context["top_rated"] = Story.published_stories.extra(select={'rating_scorex': 
-            '((100/%s*rating_score/(rating_votes+%s))+100)/2' % 
-            (Story.rating.range, Story.rating.weight)}).order_by('-rating_scorex')
+            rating_formula % 
+            (Story.rating.range, Story.rating.weight)}).order_by('-rating_scorex')[:num_stories_in_list]
 
     try:
-        context["random_story"] = Story.published_stories.order_by('?')[0]
+        context["random_stories"] = Story.published_stories.order_by('?')[:num_random_stories]
     except:
-        context["random_story"] = None
+        context["random_stories"] = None
         
     try:
         context["winner_story"] = Competition.objects.filter(judged=True).order_by('-date')[0].winner
@@ -43,19 +49,24 @@ def home(req):
         context["winner_story"] = None
     
     try:
-        context["shortys_story"] = Story.published_stories.order_by('?')[0] 
+        shorty = User.objects.get(username = "shorty")
+        context["shortys_story"] = Story.published_stories.filter(author=shorty).order_by('-date_published')[0]
     except:
         context["shortys_story"] = None
-    
+
+    try:
+        context["latest_competitions"] = Competition.objects.filter(active=True);
+    except:
+        context["latest_competitions"] = None
+
     context["genres"] = Genre.objects.all()
     
     return direct_to_template(req,"stories/home.html",context)
 
 def random_story(req):
     context = {}
-    context["story"]=Story.published_stories.order_by('?')[0]
-    context["do_short_preview"]=True
-    return direct_to_template(req,"stories/story_preview.html",context)
+    context["story_list"]=Story.published_stories.order_by('?')[:num_random_stories]
+    return direct_to_template(req,"stories/story_list.html",context)
 
 @login_required
 def edit_story(req,story_id):
@@ -76,14 +87,12 @@ def create_story(req):
         form = StoryForm()
     return direct_to_template(req,"stories/edit_story.html",{"form":form})
 
-def read_story(req,story_id):        
-        
+def read_story(req,story_id):
         story = Story.objects.get(id = story_id)
         if req.user == story.author:
             qs = Story.objects.all()
         else:
-            qs = Story.published_stories.all()
-            ViewTracker.add_view_for(story)
+            qs = Story.objects.filter(Q(published=True) | Q(hidden=True) )
         
         user_rating = story.rating.get_rating_for_user(req.user, req.META['REMOTE_ADDR'])
         story_rating = round(story.rating.get_rating())
@@ -94,14 +103,24 @@ def read_story(req,story_id):
         return object_detail(req,qs,story_id,template_name="stories/read_story.html",extra_context=extra_context)
 
 def rate_story(req,story_id):
+    if "rating" not in req.GET:
+        return HttpResponse("fail")
+    
     rating_str = req.GET["rating"]
     if rating_str == "undefined":
         rating = 0
     else:
         rating = int(rating_str)
     
-    Story.published_stories.get(id=story_id).rating.add(score=rating, user=req.user, ip_address=req.META['REMOTE_ADDR'])
-    return HttpResponse("ok")    
+    try:
+        if rating>0:
+            Story.published_stories.get(id=story_id).rating.add(score=rating, user=req.user, ip_address=req.META['REMOTE_ADDR'])
+        else:
+            Story.published_stories.get(id=story_id).rating.delete(user=req.user, ip_address=req.META['REMOTE_ADDR'])
+    except:
+        return HttpResponse("fail")
+    
+    return HttpResponse("ok")
     
 def render_to_pdf(template_src, context_dict):
     template = get_template(template_src)
@@ -157,16 +176,14 @@ def archive(req,template_name,extra_context={}):
     
     if order=="order_rating":
         queryset = queryset.extra(select={'rating_scorex':
-            '((100/%s*rating_score/(rating_votes+%s))+100)/2' % 
+            rating_formula % 
             (Story.rating.range, Story.rating.weight)})
         queryset = queryset.order_by('-rating_scorex')
     else:
         queryset = queryset.order_by('-date_published')
         
-
-    
-    years = Story.objects.dates('date_published','year')
-    months = Story.objects.dates('date_published','month')
+    years = Story.published_stories.dates('date_published','year')
+    months = Story.published_stories.dates('date_published','month')
     
     date_filter = {}
     for year in years:
@@ -175,7 +192,7 @@ def archive(req,template_name,extra_context={}):
         date_filter[month.year].append(month)
     context["dates"] = date_filter            
     
-    return object_list(req,queryset,template_name=template_name, paginate_by=2, template_object_name="story", extra_context=context)
+    return object_list(req,queryset,template_name=template_name, paginate_by=15, template_object_name="story", extra_context=context)
 
 def story_archive(req):
     return archive(req,"stories/story_archive.html");
@@ -189,7 +206,9 @@ def view_author(req,author_id):
     return archive(req,"stories/view_author.html",{"author":author_id,"author_obj":author_obj});
     
 def about(req):
-    return direct_to_template(req,"stories/about.html",{})
+    about_title = "About Shorty's Shebeen"
+    about_id = Story.objects.filter(author__username="shorty").filter(title=about_title)[0].id
+    return read_story(req,about_id)
    
 @login_required 
 def edit_profile(req):

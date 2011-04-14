@@ -5,8 +5,6 @@ from django.contrib import admin
 admin.autodiscover()
 import registration
 
-import shortys_construction.views
-
 urlpatterns = patterns('',
     # Main Stories App
     (r'^', include('shortys_shebeen.stories.urls')),

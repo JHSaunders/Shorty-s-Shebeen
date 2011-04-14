@@ -1,4 +1,6 @@
 *~
 *.pyc
 *.db
-
+local_settings.py
+media/img/genres/*
+media/img/competitions/*

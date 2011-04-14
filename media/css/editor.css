@@ -1,5 +1,6 @@
 #story_editor {
     width:100%;
+    text-indent:0px;
 }
 
 #story_editor label {
@@ -16,14 +17,19 @@
 #id_title {
     width:50%;
 }
+
 #id_text {
-    width:98%;
     height:600px;
 }
 
 #id_description {
-    width:95%;
+    width:99%;
     height:100px;
+}
+
+#id_published {
+    height:2em;
+    width:2em;
 }
 
 #story_editor ul { 

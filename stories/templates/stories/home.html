@@ -39,34 +39,40 @@ $(document).ready(
   {% endwith %}
 </div>
 
-{% with "True" as do_short_preview %}
+<div id="right" class="home_column">
 
-{% if random_story %}
-<div id="sidebar">
-<h1 class="section">Random Story<img id="refresh_random" src="/media/img/Refresh-icon.png" alt="" width="25" height="25" align="top" /></h1>
-<div id="random_story">
-  {% with random_story as story %}
+{% if shortys_story %}
+<h1 class="section"><a href="{% url view_author shortys_story.author.id%}">Shorty's R0.02</a></h1>
+  {% with shortys_story as story %}
   {% include "stories/story_preview.html" %}
   {% endwith %}
-</div>
+{% endif %}
+
+{% if latest_competitions %}
+<h1 class="section"><a href="{% url competitions %}">Current Competitions</a></h1>
+  {% for competition in latest_competitions %}
+  {% include "stories/competition_short_preview.html" %}
+  {% endfor %}
 {% endif %}
 
 {% if winner_story %}
-<h1 class="section">Latest Winner </h1>
+<h1 class="section">Latest Winner</h1>
   {% with winner_story as story %}
   {% include "stories/story_preview.html" %}
   {% endwith %}
-
 {% endif %}
 
-{% if shortys_story %}
-<h1 class="section">Shorty's R0.02</h1>
-{% with shortys_story as story %}
-{% include "stories/story_preview.html" %}
-{% endwith %}
-
+{% if random_stories %}
+<h1 class="section">Random Stories<img id="refresh_random" src="/media/img/Refresh-icon.png" alt="" width="25" height="25" align="top" /></h1>
+<div id="random_story">
+  {% with random_stories as story_list %}
+  {% include "stories/story_list.html" %}
+  {% endwith %}
 </div>
 {% endif %}
 
-{% endwith %}
+</div>
+
+
+
 {%endblock%}

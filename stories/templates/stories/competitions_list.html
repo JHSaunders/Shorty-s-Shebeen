@@ -1,12 +1,19 @@
 {% extends "base.html" %}
 
 {% block outer_content %}
+
+{% if open_competitions %}
 <h1 class="title">Open Competitions</h1>
 {% for competition in open_competitions %}
 {% include "stories/competition_preview.html" %}
 {% endfor %}
+{% endif %}
+
+{% if closed_competitions %}
 <h1 class="title">Closed Competitions</h1>
 {% for competition in closed_competitions %}
 {% include "stories/competition_preview.html" %}
 {% endfor %}
+{% endif %}
+
 {% endblock %}

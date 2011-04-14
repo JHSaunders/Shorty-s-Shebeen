@@ -21,6 +21,9 @@
     <script type="text/javascript" src="/media/js/jquery.rating.js"></script>
     <script type="text/javascript" src="/media/js/menu.js"></script>
     {%endblock%}
+    <meta name="google-site-verification" content="1clrmSsguiOB_I1JaYnHNo7vEqHcs7oAJRwa1bHr9wM" />
+    <meta name="google-site-verification" content="_FS2D8TWC7frd2ioUk1qKdJR0zgnxqkdkNEcWEIAWWE" />
+    <link rel="shortcut icon" href="/media/img/favicon.ico" />    
     <title>{%block pagetitle %}Shorty's Shebeen - South African Short Stories{% endblock %}</title>
 </head>
 {% endblock %}
@@ -29,8 +32,15 @@
 <div id="wrapper">
 
 {% block body %}
+
+
 <div id="header">
 <div id="flash">
+{% if user_agent_is_mac %}
+<div>
+  <img src="/media/img/shortstories2.jpg"  width="1418" height="270" alt=""/>
+</div>
+{% else %}
 <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="1418" height="270" id="FlashID" title="Shorty's Short Story Shebeen">
   <param name="movie" value="/media/flash/flame_effect3.swf" />
   <param name="quality" value="high" />
@@ -51,6 +61,7 @@
   </object>
   <!--<![endif]-->
 </object>
+{% endif %}
 </div>
 </div>
 
@@ -106,6 +117,23 @@
 swfobject.registerObject("FlashID");
 //-->
 </script>
+
+
+{% if debug %}
+{% else %}
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-2959473-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+{% endif %}
+
 {% endblock %}
 </body>
 </html>

@@ -1,0 +1,23 @@
+{% extends "stories/story_archive.html" %}
+
+{% block title%}
+Competition Entries: {{competition_obj}}
+{%endblock%}
+
+{%block info_frame%}
+<div id="sidebar" class = "sidebar_frame">
+<h1 class="name">Information</h1>
+<p>
+
+<img class="sidebar-image" src="/media/{{competition_obj.image}}" alt="{{competition_obj.name}}"/>
+Due date: {{competition_obj.date}}</br>
+{{competition_obj.description}}
+
+{% if competition_obj.winner %}
+  {% if competition.judged %}
+  Winner: <a href="{% url read_story competition.winner.id %}">{{competition_obj.winner}}</a> by <a href="{% url view_author competition.winner.author.id %}">{{competition_obj.winner.author}}</a>
+  {% endif %}
+{% endif %}
+</p>
+</div>
+{%endblock%}
