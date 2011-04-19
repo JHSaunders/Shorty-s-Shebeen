@@ -1,8 +1,44 @@
+
+@font-face {
+    font-family: 'ImperatorRegular';
+    src: url('../fonts/imperator-webfont.eot');
+    src: url('../fonts/imperator-webfont.eot?#iefix') format('eot'),
+         url('../fonts/imperator-webfont.woff') format('woff'),
+         url('../fonts/imperator-webfont.ttf') format('truetype'),
+         url('../fonts/imperator-webfont.svg#webfontb0yi0Q2C') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+@font-face {
+    font-family: 'CartoGothicStdBook';
+    src: url('../fonts/CartoGothicStd-Book-webfont.eot');
+    src: url('../fonts/CartoGothicStd-Book-webfont.eot?#iefix') format('eot'),
+         url('../fonts/CartoGothicStd-Book-webfont.woff') format('woff'),
+         url('../fonts/CartoGothicStd-Book-webfont.ttf') format('truetype'),
+         url('../fonts/CartoGothicStd-Book-webfont.svg#webfont1l1oLWSU') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'CartoGothicStdItalic';
+    src: url('../fonts/CartoGothicStd-Italic-webfont.eot');
+    src: url('../fonts/CartoGothicStd-Italic-webfont.eot?#iefix') format('eot'),
+         url('../fonts/CartoGothicStd-Italic-webfont.woff') format('woff'),
+         url('../fonts/CartoGothicStd-Italic-webfont.ttf') format('truetype'),
+         url('../fonts/CartoGothicStd-Italic-webfont.svg#webfontwfIPNIfh') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
 body {
 	margin: 0;
 	padding: 0;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 12px;
+	font-family: 'CartoGothicStdBook', Arial, Helvetica, sans-serif;
+	font-size: 15px;
 	color: #1E1E1E;
 	background-image: url(/media/img/shortstories.jpg); 
 	background-repeat:no-repeat;
@@ -14,7 +50,7 @@ body {
 h1, h2, h3, h4 {
 	margin: 0;
 	padding: 0;
-	font-family: Georgia, "Times New Roman", Times, serif;
+	font-family: 'ImperatorRegular', Georgia, "Times New Roman", Times, serif;
 	font-weight: normal;
 	color: #534616;
 	text-indent:0px;
@@ -46,7 +82,7 @@ ul, ol {
  
 a {
 	text-decoration: none;
-	color: #3B9008;
+	color: #390;
 }
 
 a img {
@@ -117,7 +153,7 @@ input[type="text"],input[type="password"]{
 .sidebar_frame
 {
     float:right;
-    width:190px;
+    width:200px;
 }
 
 /* Home page */
@@ -146,6 +182,7 @@ input[type="text"],input[type="password"]{
 	background-position: top left, center center;
 	*/
 	padding: 5px;
+	padding-bottom: 3px;
 	padding-left: 10px;
 	margin: 5px;
 	margin-top: 0px;
@@ -156,18 +193,17 @@ input[type="text"],input[type="password"]{
 	-khtml-border-radius:8px;
 	border-radius:8px;
 	box-shadow:1px 1px 10px #030;
-  -webkit-box-shadow:1px 1px 10px #030;
-  -moz-box-shadow: 1px 1px 10px #030;
+	-webkit-box-shadow:1px 1px 10px #030;
+	-moz-box-shadow: 1px 1px 10px #030;
 	letter-spacing: -0.5px;
-	color: #3BA20E; 
-  text-shadow:1px 1px 2px #000000;
+	color: #47CB07;
+	text-shadow:1px 1px 2px #000000;
 	border: thin outset  #3BA20E;
-	
 }
  
 .section  a {
 	border: none;
-	color: #3BA20E;
+	color: #47CB07;
 }
 
 /* Story List */
@@ -204,11 +240,11 @@ input[type="text"],input[type="password"]{
 	background-image: url(/media/img/redback_clean.png);
 	background-repeat:repeat-y;
 	background-position: top left;
-	color: #DF7401;
+	color: #FF7B1A;
 	text-shadow:1px 1px 2px #000000;
 	padding-top: 5px;
 	padding-right: 0;
-	padding-bottom: 5px;
+	padding-bottom: 3px;
 	padding-left: 10px;
 	-moz-border-radius:8px;
 	-webkit-border-radius:8px;
@@ -223,7 +259,7 @@ input[type="text"],input[type="password"]{
  
 .story .title a {
 	border: none;
-	color: #DF7401;
+	color: #FF7B1A;
 }
 
 .story .author {
@@ -237,7 +273,7 @@ input[type="text"],input[type="password"]{
 	height:auto;
 	margin-top: 3px;
 	margin-bottom: 0px;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: "CartoGothicStdItalic", Arial, Helvetica, sans-serif;
 }
  
 .story .author a {
@@ -252,7 +288,7 @@ input[type="text"],input[type="password"]{
 	margin-right:5px;
 	margin-top: 20;
 	line-height: 110%;
-	font-size:13px;
+	font-size:15px;
 	line-height: 1.5em;
 }
 
@@ -261,7 +297,7 @@ input[type="text"],input[type="password"]{
 	padding-bottom: 0px;
 	padding-left: 10px;
 	text-align: left;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: 'CartoGothicStdBook', Arial, Helvetica, sans-serif;
 	font-size: 11px;
 	font-style: italic;
 	color: #000;
@@ -397,7 +433,7 @@ text-align:center;
 
 .sidebar_wrapper {
     float:right;
-    width:190px;
+    width:220px;
 }
 
 li.menu-item-contracted ul {
@@ -497,7 +533,7 @@ img.competition-image {
 	margin: 0 auto;
 	width:100%;
 	padding: 0px 0 15px 0;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: 'CartoGothicStdBook', Arial, Helvetica, sans-serif;
 	line-height: normal;
 	font-size: 12px;
 	text-align: center;

@@ -1,3 +1,14 @@
+@font-face {
+    font-family: 'ImperatorRegular';
+    src: url('imperator-webfont.eot');
+    src: url('imperator-webfont.eot?#iefix') format('eot'),
+         url('imperator-webfont.woff') format('woff'),
+         url('imperator-webfont.ttf') format('truetype'),
+         url('imperator-webfont.svg#webfontb0yi0Q2C') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
 #menu-buffer
 {
   height:35px;
@@ -16,9 +27,11 @@
 	-khtml-border-radius:8px;
 	border-radius:8px;
 	/*box-shadow:1px 1px 2px #999;*/
-	font-weight:bold;
-	font-family:Georgia, "Times New Roman", Times, serif;
-	font-size:18px;
+	font-family: 'ImperatorRegular', Georgia, "Times New Roman", Times, serif;
+	font-size:17px;
+	text-shadow:1px 1px 4px #666;
+
+	
 
    /* -webkit-box-shadow:1px 1px 10px #999;
     -moz-box-shadow: 1px 1px 10px #999;
@@ -44,12 +57,13 @@
 		}
 
 	#jsddm li a, #user-info li a
-	{	
-	    display: block;
-		padding: 5px 12px;
-		text-decoration: none;
-		color: #EAFFED;
-		white-space: nowrap}
+	{
+	display: block;
+	padding: 7px 12px;
+	text-decoration: none;
+	color: #EAFFED;
+	white-space: nowrap
+}
 
   #jsddm li span, #user-info li span
   { 
@@ -64,15 +78,18 @@
   
 	#jsddm li a:hover, #user-info li a:hover
 	{
-    	background: #840403 url(/media/img/redback3.png) repeat left top;
+    	color:#F60;
+		/*background: #840403 url(/media/img/redback3.png) repeat left top;
    		-moz-border-radius:8px;
         -webkit-border-radius:8px;
         -opera-border-radius:8px;
         -khtml-border-radius:8px;
         border-radius:8px;
-	box-shadow: 1px 1px 10px #B45F04;
+		text-shadow:1px 1px 2px #000000;
+		box-shadow: 1px 1px 10px #B45F04;
     -webkit-box-shadow: 1px 1px 10px #B45F04;
     -moz-box-shadow: 1px 1px 10px #B45F04;
+	border: thin outset #DF7401;*/
 
 	}
 		
@@ -81,7 +98,7 @@
 			padding: 0;
 			position: absolute;
 			visibility: hidden;
-			background: #840403 url(/media/img/greyback.png) repeat left top;
+			background: #000; /*url(/media/img/greyback.png) repeat left top;*/
 			}
 		
 		#jsddm li ul li
