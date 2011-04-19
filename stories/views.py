@@ -96,7 +96,7 @@ def read_story(req,story_id):
         
         disqus_shortname = settings.DISQUS_WEBSITE_SHORTNAME;
         disqus_identifier = 'shortys-shebeen-{0}'.format(story_id);
-        disqus_url = reverse('read_story', args=[story_id]);
+        disqus_url = 'http://www.shortysshebeen.co.za'+reverse('read_story', args=[story_id]);
         
         user_rating = story.rating.get_rating_for_user(req.user, req.META['REMOTE_ADDR'])
         story_rating = round(story.rating.get_rating())
