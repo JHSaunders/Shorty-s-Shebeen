@@ -94,11 +94,19 @@ def read_story(req,story_id):
         else:
             qs = Story.objects.filter(Q(published=True) | Q(hidden=True) )
         
+        disqus_shortname = settings.DISQUS_WEBSITE_SHORTNAME;
+        disqus_identifier = 'shortys-shebeen-{0}'.format(story_id);
+        disqus_url = reverse('read_story', args=[story_id]);
+        
         user_rating = story.rating.get_rating_for_user(req.user, req.META['REMOTE_ADDR'])
         story_rating = round(story.rating.get_rating())
         extra_context = {"next":reverse("read_story",args=[story_id]),
             "user_rating":user_rating,
-            "story_rating":story_rating}
+            "story_rating":story_rating,
+            "disqus_shortname":disqus_shortname,
+            "disqus_identifier":disqus_identifier,
+            "disqus_url":disqus_url
+            }
             
         return object_detail(req,qs,story_id,template_name="stories/read_story.html",extra_context=extra_context)
 
