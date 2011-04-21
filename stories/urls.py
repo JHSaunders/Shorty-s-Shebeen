@@ -7,8 +7,10 @@ urlpatterns = patterns('',
     
     url(r'^story/(?P<story_id>\d+)/read',views.read_story,name="read_story"),
     
-    url(r'^story/(?P<story_id>\d+)/download',views.download_story,name="download_story"),
+    url(r'^story/(?P<story_id>\d+)/download$',views.download_story,name="download_story"),
     
+    url(r'^story/(?P<story_id>\d+)/download_html$',views.download_story_html,name="download_story_html"),
+        
     url(r'^story/(?P<story_id>\d+)/edit',views.edit_story,name="edit_story"),
     
     url(r'^story/create',views.create_story,name="create_story"),
