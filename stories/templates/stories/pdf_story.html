@@ -2,10 +2,43 @@
 <html>
 <head>
 <title>{{object.title}}</title>
+<style>
+@font-face {
+  font-family: CartoGothicStd;
+  src: url({{media_root}}/fonts/CartoGothicStd-Book-webfont.ttf);
+}
+
+body {
+  font-family: CartoGothicStd;
+}
+
+#footerContent {
+  text-align:center;
+}
+
+@page {
+  margin: 1cm;
+  margin-bottom: 2.5cm;
+  @frame footer {
+    -pdf-frame-content: footerContent;
+    bottom: 2cm;
+    margin-left: 1cm;
+    margin-right: 1cm;
+    height: 1cm;
+  }
+}
+</style>
 </head>
 <body>
+<div>
+</div>
 <h1>{{object.title}}</h1>
 <p class="byline">by {{object.author}}</p>
+<div id="story-text">
 {{object.text|markdown}}
+</div>
+<div id="footerContent">
+  Page <pdf:pagenumber>
+</div>
 </body>
 </html>
