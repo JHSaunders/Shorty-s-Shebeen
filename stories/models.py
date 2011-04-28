@@ -58,14 +58,16 @@ class Story(models.Model):
     
     def get_preview(self,preview_size):
         if self.description != "":
-            return self.description
-        html = markdown(self.text)
-        text = ''.join(BeautifulSoup(html).findAll(text=True))
-        return text[:preview_size]+"..."
+            text = self.description
+        else:
+            text = self.text[:preview_size]+"..."
+        
+        
+        
+        return text + " (_[read more]("+self.get_absolute_url()+")_)"
 
     @property
     def preview(self):
-
         return self.get_preview(400)
     
     @property       

@@ -226,7 +226,9 @@ def edit_profile(req):
         profile_form = AuthorProfileForm(req.POST,instance = req.user.profile)        
         if auth_details_form.is_valid() and profile_form.is_valid():
             auth_details_form.save()
-            profile_form.save()            
+            profile_form.save()
+            return HttpResponseRedirect(reverse("author_dashboard"))
+            
     else:
         auth_details_form = AuthenticationDetailsForm(instance = req.user)
         profile_form = AuthorProfileForm(instance = req.user.profile)

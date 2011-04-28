@@ -7,14 +7,15 @@
 <div>
 
 </div>
-<div>
-
-{%if do_short_preview %}
+<div class="mini-markdown mini-markdown-padding">
+{%if do_short_preview%}
 <p>
-{{story.short_preview}}
+{{story.short_preview|markdown:"safe"}}
 </p>
 {%else%}
-<p>{{story.preview}}</p>
+<p>
+{{story.preview|markdown:"safe"}}
+</p>
 {%endif%}
 
 </div>
