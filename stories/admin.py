@@ -2,7 +2,11 @@ from django.contrib import admin
 from models import *
 
 class StoryAdmin(admin.ModelAdmin):
-    pass
+    date_hierarchy = 'date_published'
+    list_display = ('author','title','genres','published','hidden','date_published','created','last_updated')
+    list_filter = ('published',)
+    search_fields = ['title','author__last_name','author__username','author__first_name']
+
     
 admin.site.register(Story, StoryAdmin)
 admin.site.register(Genre)

@@ -73,7 +73,7 @@ class Story(models.Model):
     @property       
     def short_preview(self):
         return self.get_preview(200)
-
+    
     @property
     def genres(self):
         first = True

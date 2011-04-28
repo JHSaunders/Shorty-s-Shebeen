@@ -22,7 +22,11 @@
 </p>
 
 <div id="story-text">
-{{object.text|markdown:"safe"}}
+{% if object.author.is_superuser %}
+  {{object.text|markdown}}
+{% else %}
+  {{object.text|markdown:"safe"}}
+{% endif %}
 </div>
 <hr/>
 

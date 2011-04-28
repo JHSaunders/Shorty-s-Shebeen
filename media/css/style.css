@@ -82,7 +82,7 @@ ul, ol {
  
 a {
 	text-decoration: none;
-	color: #390;
+	color: #0B610B;
 }
 
 a img {
@@ -389,12 +389,6 @@ hr.invisible{
 
 .show-hide-fulltext-bar img {
   height:1em;
-}
-
-div#story-action-box {
-  float:right;
-  border: thin outset #DF7401;
-  background-color: #deb78c;
 }
 
 div.auth-box {
