@@ -1,6 +1,12 @@
 {% extends "stories/story_archive.html" %}
 {% load markup %}
 
+{% block style %}
+{{ block.super }}
+<link rel="alternate" type="application/rss+xml" title="Stories by {{author_obj}} from Shorty's Short Story Shebeen" 
+href="{%url author_feed author_obj.id %}"/>
+{% endblock %}
+
 {% block title%}
 {{author_obj}}
 {%endblock%}
@@ -29,7 +35,9 @@
   <a href="{%url edit_profile %}"><img src="/media/img/profile.png" alt="link"/>  Edit Profile</a>
 </li>
 {% endifequal %} 
-
+<li>
+<a href="{%url author_feed author_obj.id %}"><img src="/media/img/rss.png" alt="rss" /> Subscribe to this Author</a>
+</li>
 </ul>
 
 </div>

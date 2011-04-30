@@ -24,7 +24,8 @@ class Story(models.Model):
     """
     class Meta:
         verbose_name_plural = "stories"   
-    
+        ordering = ["-date_published"]
+            
     author = models.ForeignKey(User,related_name = 'stories',editable=False)
     
     title = models.CharField(max_length = 100)

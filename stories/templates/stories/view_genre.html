@@ -1,5 +1,12 @@
 {% extends "stories/story_archive.html" %}
 {%load markup %}
+
+{% block style %}
+{{ block.super }}
+<link rel="alternate" type="application/rss+xml" title="{{genre_obj.name}} stories at Shorty's Shebeen" 
+href="{%url genre_feed genre_obj.id %}"/>
+{% endblock %}
+
 {% block title%}
 {{genre_obj}}
 {%endblock%}
@@ -11,8 +18,12 @@
 <img class="genre-image" src="/media/{{genre_obj.image}}" alt="{{genre_obj.name}}" />
 {% endif %}
 {% if genre_obj.description %}
-<p>{{genre_obj.description|markdown}}</p>
+{{genre_obj.description|markdown}}
 {% endif %}
+<div>
 
+
+<a href="{%url genre_feed genre_obj.id %}"><img src="/media/img/rss.png" alt="rss" /> Subscribe to {{genre_obj.name}} stories</a>
+</div>
 </div>
 {%endblock%}
