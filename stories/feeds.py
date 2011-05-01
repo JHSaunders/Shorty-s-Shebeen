@@ -5,8 +5,25 @@ from django.shortcuts import get_object_or_404
 from models import *
 
 from views import rating_formula
+import markdown
 
-class GenreFeed(Feed):
+class StoryFeed(Feed):
+    title_template = "stories/feed_item_title.html"
+    description_template = "stories/feed_item_description.html"
+    
+#    def item_title(self, item):
+#        return "{0} by <i>{1}</i>".format(item.title,item.author)
+
+#    def item_description(self, item):
+#        md = markdown.Markdown(safe_mode="replace")
+#        text = item.text#item.get_preview(1000)
+#        html = md.convert(text)
+#        return html
+#    
+    def item_link(self, item):
+        return item.get_absolute_url()
+
+class GenreFeed(StoryFeed):
     def get_object(self, request, genre_id):
         return Genre.objects.get(id = genre_id)
 
@@ -21,17 +38,8 @@ class GenreFeed(Feed):
 
     def items(self, obj):
         return Story.published_stories.filter(genre=obj)[:30]
-        
-    def item_title(self, item):
-        return item.title
-
-    def item_description(self, item):
-        return item.description
     
-    def item_link(self, item):
-        return item.get_absolute_url()
-
-class AuthorFeed(Feed):
+class AuthorFeed(StoryFeed):
     def get_object(self, request, author_id):
         return User.objects.get(id = author_id)
 
@@ -46,17 +54,8 @@ class AuthorFeed(Feed):
 
     def items(self, obj):
         return Story.published_stories.filter(author=obj)[:30]
-        
-    def item_title(self, item):
-        return item.title
-
-    def item_description(self, item):
-        return item.description
     
-    def item_link(self, item):
-        return item.get_absolute_url()
-        
-class LatestFeed(Feed):
+class LatestFeed(StoryFeed):
     def title(self):
         return "Latest stories from Shorty's Short Story Shebeen"
 
@@ -68,17 +67,8 @@ class LatestFeed(Feed):
 
     def items(self):
         return Story.published_stories.all()[:30]
-        
-    def item_title(self, item):
-        return item.title
-
-    def item_description(self, item):
-        return item.description
     
-    def item_link(self, item):
-        return item.get_absolute_url()
-        
-class TopRatedFeed(Feed):
+class TopRatedFeed(StoryFeed):
     def title(self):
         return "Top rated stories from Shorty's Short Story Shebeen"
 
@@ -92,12 +82,4 @@ class TopRatedFeed(Feed):
         return Story.published_stories.extra(select={'rating_scorex': 
             rating_formula % 
             (Story.rating.range, Story.rating.weight)}).order_by('-rating_scorex')[:10]
-        
-    def item_title(self, item):
-        return item.title
-
-    def item_description(self, item):
-        return item.description
-    
-    def item_link(self, item):
-        return item.get_absolute_url()
+            

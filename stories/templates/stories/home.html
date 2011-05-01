@@ -31,15 +31,24 @@ $(document).ready(
 
 {% block content %}
 <div id="left" class="home_column">
-  <h1 class="section"><a href="{%url story_archive %}?order=order_date">Latest</a></h1>
+  <h1 class="section">
+    <a href="{%url story_archive %}?order=order_date">Latest</a>
+    <a style="float:right;" href="{%url latest_feed %}">
+      <img src="/media/img/rss-24.png" alt="rss" />
+    </a>
+  </h1>
   {% with latest as story_list %}
   {% include "stories/story_list.html" %}
   {% endwith %}
-         
 </div>
 
 <div id="middle" class="home_column">
-  <h1 class="section"><a href="{%url story_archive %}?order=order_rating">Top Rated</a></h1>
+  <h1 class="section">
+    <a href="{%url story_archive %}?order=order_rating">Top Rated</a>
+    <a style="float:right;" href="{%url top_rated_feed %}">
+      <img src="/media/img/rss-24.png" alt="rss" />
+    </a>
+  </h1>
   {% with top_rated as story_list %}
   {% include "stories/story_list.html" %}
   {% endwith %}
