@@ -7,9 +7,9 @@
 </p>
 
 {% if obj.author.is_superuser %}
-  {{obj.text|markdown}}
+  {{obj.text|markdown:"autobr,safe"}}
 {% else %}
-  {{obj.text|markdown:"safe"}}
+  {{obj.text|markdown:"autobr,safe"}}
 {% endif %}
 <p>
 <a href="http://{{site.domain}}{%url read_story obj.id%}">Click here to comment, rate or share</a>

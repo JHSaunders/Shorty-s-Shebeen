@@ -18,7 +18,7 @@ href="{%url genre_feed genre_obj.id %}"/>
 <img class="genre-image" src="/media/{{genre_obj.image}}" alt="{{genre_obj.name}}" />
 {% endif %}
 {% if genre_obj.description %}
-{{genre_obj.description|markdown}}
+{{genre_obj.description|markdown:"autobr,safe"}}
 {% endif %}
 <div>
 

@@ -16,7 +16,7 @@ href="{%url author_feed author_obj.id %}"/>
 <h1 class="name">Author Profile</h1>
 <ul>
 <li class="mini-markdown">
-{{author_obj.get_profile.about|markdown:"safe"}}
+{{author_obj.get_profile.about|markdown:"autobr,safe"}}
 </li>
 {% if author_obj.get_profile.blog %}
 <li>
