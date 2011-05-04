@@ -9,9 +9,9 @@
 </div>
 <div class="mini-markdown mini-markdown-padding">
 {%if do_short_preview%}
-{{story.short_preview|markdown:"safe"}}
+{{story.short_preview|markdown:"autobr,safe"|linebreaksbr}}
 {%else%}
-{{story.preview|markdown:"safe"}}
+{{story.preview|markdown:"autobr,safe"|linebreaksbr}}
 {%endif%}
 </div>
 

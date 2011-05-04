@@ -23,9 +23,9 @@
 
 <div id="story-text">
 {% if object.author.is_superuser %}
-  {{object.text|markdown}}
+  {{object.text|markdown:"autobr"}}
 {% else %}
-  {{object.text|markdown:"safe"}}
+  {{object.text|markdown:"safe,autobr"|linebreaksbr}}
 {% endif %}
 </div>
 <hr/>

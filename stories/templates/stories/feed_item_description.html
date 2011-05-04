@@ -1,7 +1,7 @@
 {% load markup %}
 <p>
 <strong>Genres:</strong>
-{% for genre in object.genre.all %}
+{% for genre in obj.genre.all %}
 <a href="{% url view_genre genre.id %}">{{genre}}</a>{%if not forloop.last %}, {%endif%}
 {% endfor %}
 </p>
@@ -12,5 +12,5 @@
   {{obj.text|markdown:"safe"}}
 {% endif %}
 <p>
-<a href="{{site.domain}}{%url read_story obj.id%}">Click here to comment, rate or share</a>
+<a href="http://{{site.domain}}{%url read_story obj.id%}">Click here to comment, rate or share</a>
 </p>

@@ -5,10 +5,35 @@
 <style>
 @font-face {
   font-family: CartoGothicStd;
-  src: url({{media_root}}/fonts/CartoGothicStd-Book-webfont.ttf);
+  src: url('{{media_root}}/fonts/CartoGothicStd-Book-webfont.ttf');
+  font-weight:normal;
+}
+
+@font-face {
+    font-family: 'ImperatorRegular';
+    src: url('{{media_root}}/fonts/imperator-webfont.ttf');
 }
 
 body {
+  font-family: CartoGothicStd;
+}
+
+hr {
+  border: solid 1px lightgrey;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'ImperatorRegular';
+  margin: 0;
+  padding: 0;
+}
+
+.title {
+  font-weight:bold;
+}
+
+.shorty {
+  color:lightgrey;
   font-family: CartoGothicStd;
 }
 
@@ -32,8 +57,16 @@ body {
 <body>
 <div>
 </div>
-<h1>{{object.title}}</h1>
-<p class="byline">by {{object.author}}</p>
+<h3 class="shorty">Shorty's Short Story Shebeen (shortysshebeen.co.za)</h3>
+<hr>
+<h1 class="title">{{object.title}}</h1>
+<p>by {{object.author}}<br/>
+<strong>Genres:</strong>
+{% for genre in object.genre.all %}
+<a href="{% url view_genre genre.id %}">{{genre}}</a>{%if not forloop.last %}, {%endif%}
+{% endfor %}
+</p>
+
 <div id="story-text">
 {{object.text|markdown}}
 </div>
