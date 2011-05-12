@@ -1,6 +1,6 @@
 {% load markup %}
 <div class="story">
 <h2 class="title"><a href="{%url competitions%}#{{competition.id}}">{{competition.name}}</a></h2>
-<div><strong>Due date: {{competition.date}}</strong></div>
-<div><a href="{%url competitions%}#{{competition.id}}">Click for more info</a></div>
+<div><strong><br />Due date: {{competition.date}}</strong><i><a href="{%url competitions%}#{{competition.id}}">    (read more)</a></i></div>
+
 </div>
