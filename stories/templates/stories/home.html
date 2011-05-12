@@ -1,5 +1,11 @@
 {% extends "base.html" %}
 
+{% block style %}
+{{ block.super }}
+<link rel="alternate" type="application/rss+xml" title="Latest stories from Shorty's Short Story Shebeen" 
+href="{%url latest_feed %}"/>
+{% endblock %}
+
 {% block scripts %}
 {{block.super}}
 <script type="text/javascript">
@@ -25,15 +31,24 @@ $(document).ready(
 
 {% block content %}
 <div id="left" class="home_column">
-  <h1 class="section"><a href="{%url story_archive %}?order=order_date">Latest</a></h1>
+  <h1 class="section">
+    <a href="{%url story_archive %}?order=order_date">Latest</a>
+    <a style="float:right;" href="{%url latest_feed %}">
+      <img src="/media/img/rss-24.png" alt="rss" />
+    </a>
+  </h1>
   {% with latest as story_list %}
   {% include "stories/story_list.html" %}
   {% endwith %}
-         
 </div>
 
 <div id="middle" class="home_column">
-  <h1 class="section"><a href="{%url story_archive %}?order=order_rating">Top Rated</a></h1>
+  <h1 class="section">
+    <a href="{%url story_archive %}?order=order_rating">Top Rated</a>
+    <a style="float:right;" href="{%url top_rated_feed %}">
+      <img src="/media/img/rss-24.png" alt="rss" />
+    </a>
+  </h1>
   {% with top_rated as story_list %}
   {% include "stories/story_list.html" %}
   {% endwith %}
@@ -62,8 +77,25 @@ $(document).ready(
   {% endwith %}
 {% endif %}
 
+<h1 class="section">Subscribe</h1>
+<div class="story">
+
+    <h2 class="title">
+    <a href="{%url latest_feed %}">
+    <img src="/media/img/rss-24.png" alt="rss" /> Latest Stories
+    </a>
+    </h2>
+    <p></p>
+    <h2 class="title">
+    <a href="{%url top_rated_feed %}">
+    <img src="/media/img/rss-24.png" alt="rss" /> Top Rated Stories
+    </a>
+    </h2>
+    
+</div>
+
 {% if random_stories %}
-<h1 class="section">Random Stories<img id="refresh_random" src="/media/img/Refresh-icon.png" alt="" width="25" height="25" align="top" /></h1>
+<h1 class="section">Random Stories<img style="float:right;"id="refresh_random" src="/media/img/Refresh-icon.png" alt="" width="25" height="25"/></h1>
 <div id="random_story">
   {% with random_stories as story_list %}
   {% include "stories/story_list.html" %}

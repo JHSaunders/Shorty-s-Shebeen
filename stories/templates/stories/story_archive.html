@@ -66,8 +66,8 @@ Archive
     <li {%ifnotequal year dyear %}class="menu-item-contracted"{%else%}class="menu-item-expanded"{%endifnotequal%}> 
         <span {%ifequal year dyear %}class="menu-item-selected"{%endifequal%} ><a href="{{request.path}}{% query_string 'year=dyear' 'year,month,page'%}">
             {{dyear}}</a>
-            <img src="/media/img/expand.png" class="contract-button expand-contract-button"/>
-            <img src="/media/img/contract.png" class="expand-button expand-contract-button"/>
+            <img src="/media/img/expand.png" class="contract-button expand-contract-button" alt="expand"/>
+            <img src="/media/img/contract.png" class="expand-button expand-contract-button" alt="contract"/>
             </span>
         <ul>
         {% for dmonth in months%}

@@ -7,16 +7,12 @@
 <div>
 
 </div>
-<div>
-
-{%if do_short_preview %}
-<p>
-{{story.short_preview}}
-</p>
+<div class="mini-markdown mini-markdown-padding">
+{%if do_short_preview%}
+{{story.short_preview|markdown:"autobr,safe"}}
 {%else%}
-<p>{{story.preview}}</p>
+{{story.preview|markdown:"autobr,safe"}}
 {%endif%}
-
 </div>
 
 <div class="meta">
@@ -30,8 +26,8 @@
 </div>
 
 <div style="clear:both">
-{{story.date_published}} 
-(<a href="{{ story.get_absolute_url }}#disqus_thread" data-disqus-identifier="{{ story.id }}">View Comments</a>)
+{{story.date_published}}
+(<a href="{{ story.get_absolute_url }}#disqus_thread" data-disqus-identifier="shortys-shebeen-{{ story.id }}">View Comments</a>)
 {% load disqus_tags %}
 {% disqus_num_replies %}
 </div>

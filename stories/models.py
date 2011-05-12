@@ -24,7 +24,8 @@ class Story(models.Model):
     """
     class Meta:
         verbose_name_plural = "stories"   
-    
+        ordering = ["-date_published"]
+            
     author = models.ForeignKey(User,related_name = 'stories',editable=False)
     
     title = models.CharField(max_length = 100)
@@ -58,20 +59,22 @@ class Story(models.Model):
     
     def get_preview(self,preview_size):
         if self.description != "":
-            return self.description
-        html = markdown(self.text)
-        text = ''.join(BeautifulSoup(html).findAll(text=True))
-        return text[:preview_size]+"..."
+            text = self.description
+        else:
+            text = self.text[:preview_size]+"..."
+        
+        
+        
+        return text + " (_[read more]("+self.get_absolute_url()+")_)"
 
     @property
     def preview(self):
-
         return self.get_preview(400)
     
     @property       
     def short_preview(self):
         return self.get_preview(200)
-
+    
     @property
     def genres(self):
         first = True

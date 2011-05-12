@@ -82,7 +82,7 @@ ul, ol {
  
 a {
 	text-decoration: none;
-	color: #390;
+	color: #0B610B;
 }
 
 a img {
@@ -391,12 +391,6 @@ hr.invisible{
   height:1em;
 }
 
-div#story-action-box {
-  float:right;
-  border: thin outset #DF7401;
-  background-color: #deb78c;
-}
-
 div.auth-box {
   width: 400px;
   margin-left:auto;
@@ -554,3 +548,29 @@ table {
 th, td{
 }
 
+/* Styles for mini-markdown - this is to allow markdown to be safely used in 
+   things like descriptions and autor profiles. It basically hides images 
+   (which would look wierd) and makes all headings small
+*/
+
+/* is there a more concise way to specify this*/
+.mini-markdown h1, .mini-markdown h2, .mini-markdown h3, .mini-markdown h4, 
+.mini-markdown h5, .mini-markdown h6 {
+  font-size: 1em; /*Same as Text*/
+  text-indent:0px;
+
+}
+
+.mini-markdown p {
+  text-indent:0px;
+  margin:5px 0px;
+}
+
+.mini-markdown img {
+  display:none;
+}
+
+.mini-markdown-padding {
+  padding-left:5px;
+  padding-right:5px;
+}

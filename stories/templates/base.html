@@ -93,6 +93,7 @@
     <li><a href="{% url view_genre genre.id %}" >{{genre}}</a></li>
     {% endfor %}
    </ul>
+</li>
 <li><a href="{% url about %}" class="menuheadlink">About</a></li>
 <li><a href="{% url story_archive %}" class="menuheadlink">Archives</a></li>
 <li><a href="{% url competitions %}" class="menuheadlink">Competitions</a></li>
@@ -114,11 +115,10 @@
 <li><a href="{% url auth_login %}">Login</a></li>
 <li><a href="{% url registration_register %}">Register</a></li>
 {% else %}
-<li><a href="{% url edit_profile %}">{{user}}</a></li>
 <li><a href="{% url author_dashboard %}">Dashboard</a></li>
 <li><a href="{% url auth_logout %}?next=/">Logout</a></li>
-</ul>
 {% endif %}
+</ul>
 </div>
 </div>
 

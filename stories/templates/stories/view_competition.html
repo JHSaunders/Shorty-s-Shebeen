@@ -1,4 +1,5 @@
 {% extends "stories/story_archive.html" %}
+{% load markup %}
 
 {% block title%}
 Competition Entries: {{competition_obj}}
@@ -11,7 +12,7 @@ Competition Entries: {{competition_obj}}
 
 <img class="sidebar-image" src="/media/{{competition_obj.image}}" alt="{{competition_obj.name}}"/>
 Due date: {{competition_obj.date}}</br>
-{{competition_obj.description}}
+{{competition_obj.description|markdown:"autobr,safe"}}
 
 {% if competition_obj.winner %}
   {% if competition.judged %}

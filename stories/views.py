@@ -7,7 +7,7 @@ from django.views.generic.simple import direct_to_template
 from django.views.generic.create_update import create_object, update_object, delete_object
 from django.views.generic.list_detail import object_detail, object_list
 from django.core.urlresolvers import reverse
-
+from django.template.defaultfilters import slugify
 from django.template.loader import get_template
 from django.template import Context
 
@@ -94,11 +94,19 @@ def read_story(req,story_id):
         else:
             qs = Story.objects.filter(Q(published=True) | Q(hidden=True) )
         
+        disqus_shortname = settings.DISQUS_WEBSITE_SHORTNAME;
+        disqus_identifier = 'shortys-shebeen-{0}'.format(story_id);
+        disqus_url = 'http://www.shortysshebeen.co.za'+reverse('read_story', args=[story_id]);
+        
         user_rating = story.rating.get_rating_for_user(req.user, req.META['REMOTE_ADDR'])
         story_rating = round(story.rating.get_rating())
         extra_context = {"next":reverse("read_story",args=[story_id]),
             "user_rating":user_rating,
-            "story_rating":story_rating}
+            "story_rating":story_rating,
+            "disqus_shortname":disqus_shortname,
+            "disqus_identifier":disqus_identifier,
+            "disqus_url":disqus_url
+            }
             
         return object_detail(req,qs,story_id,template_name="stories/read_story.html",extra_context=extra_context)
 
@@ -122,19 +130,25 @@ def rate_story(req,story_id):
     
     return HttpResponse("ok")
     
-def render_to_pdf(template_src, context_dict):
+def render_to_pdf(template_src, context_dict,filename):
     template = get_template(template_src)
     context = Context(context_dict)
+    context["media_root"] = settings.MEDIA_ROOT
     html  = template.render(context)
     result = StringIO.StringIO()
-    pdf = pisa.pisaDocument(StringIO.StringIO(html.encode("ISO-8859-1")), result)
+    pdf = pisa.pisaDocument(StringIO.StringIO(html.encode("UTF-8")), result, encoding='UTF-8')
     if not pdf.err:
-        return HttpResponse(result.getvalue(), mimetype='application/pdf')
+        response = HttpResponse(result.getvalue(), mimetype='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename={0}'.format(filename)
+        return response
     return HttpResponse('We had some errors<pre>%s</pre>' % cgi.escape(html))
 
 def download_story(req,story_id):
-    return render_to_pdf('stories/pdf_story.html',{"object":Story.objects.get(id=story_id)})
+    return render_to_pdf('stories/pdf_story.html',{"object":Story.objects.get(id=story_id)},slugify(Story.objects.get(id=story_id).title)+".pdf")
 
+def download_story_html(req,story_id):
+    return direct_to_template(req,"stories/pdf_story.html",{"object":Story.objects.get(id=story_id)})
+    
 def archive(req,template_name,extra_context={}):
     search=req.GET.get("search")
     author=req.GET.get("author")
@@ -218,7 +232,9 @@ def edit_profile(req):
         profile_form = AuthorProfileForm(req.POST,instance = req.user.profile)        
         if auth_details_form.is_valid() and profile_form.is_valid():
             auth_details_form.save()
-            profile_form.save()            
+            profile_form.save()
+            return HttpResponseRedirect(reverse("author_dashboard"))
+            
     else:
         auth_details_form = AuthenticationDetailsForm(instance = req.user)
         profile_form = AuthorProfileForm(instance = req.user.profile)

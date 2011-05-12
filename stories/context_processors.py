@@ -3,7 +3,7 @@ import string
 from models import *
 def genre_list(req):
   context = {}
-  context["genre_list"]=Genre.objects.all()
+  context["genre_list"]=Genre.objects.order_by("name")
   return context
 
 def detect_user_agent(req):
