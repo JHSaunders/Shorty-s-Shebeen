@@ -13,7 +13,7 @@ Please enter the following details to register. Once you have completed these de
 <th>{{form.username.label}}</th>
 <td>{% if form.username.errors %}
     <ul class="errorlist">
-    <li>Usernames can only contain letters (A-Z,a-z), numbers(0-9) and underscores (_) with no spaces.</li>
+    <li>The username already exists or is invalid. Usernames can only contain letters (A-Z,a-z), numbers(0-9) and underscores (_) with no spaces.</li>
     </ul>
     {%endif%}
     {{form.username}}</td>

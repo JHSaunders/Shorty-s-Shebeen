@@ -57,15 +57,16 @@ class Story(models.Model):
             self.date_published = datetime.datetime.now()
         super(Story, self).save()
     
-    def get_preview(self,preview_size):
+    def get_preview(self,preview_size,add_link=True):
         if self.description != "":
             text = self.description
         else:
             text = self.text[:preview_size]+"..."
         
-        
-        
-        return text + " (_[read more]("+self.get_absolute_url()+")_)"
+        if add_link:
+            return text + " (_[read more]("+self.get_absolute_url()+")_)"
+        else:
+            return text
 
     @property
     def preview(self):
@@ -74,6 +75,10 @@ class Story(models.Model):
     @property       
     def short_preview(self):
         return self.get_preview(200)
+    
+    @property       
+    def meta_description(self):
+        return self.get_preview(400,False)
     
     @property
     def genres(self):

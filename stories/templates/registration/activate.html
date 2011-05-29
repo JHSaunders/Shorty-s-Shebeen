@@ -1,11 +1,21 @@
-{% extends "base.html" %}
+{% extends "stories/single_frame_page.html" %}
 
 {% load markup %}
 
-{% block content %}
+{% block title %}
 {% if account %}
-Activation worked, welcome {{account}}
+Activation complete, welcome to the shebeen.
 {%else%}
 Activation failed! 
+{%endif%}
+
+{%endblock%}
+
+{% block content %}
+{% if account %}
+<strong>
+Click here to go to your <a href="{% url author_dashboard %}">Dashboard</a> and start writing.</strong>
+{%else%}
+There has been an error with your account activation, please contact <a href="mailto:james@shortysshebeen.co.za">james@shortysshebeen.co.za</a>
 {%endif%}
 {% endblock %}

@@ -7,6 +7,8 @@ def genre_list(req):
   return context
 
 def detect_user_agent(req):
+  if "HTTP_USER_AGENT" not in req.META:
+    return context 
   user_agent = req.META["HTTP_USER_AGENT"]
   context = {}
   context["user_agent_is_mac"]= string.find(user_agent,"Mac OS X")>-1
