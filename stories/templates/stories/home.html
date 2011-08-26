@@ -32,12 +32,22 @@ $(document).ready(
 {% block content %}
 <div id="left" class="home_column">
   <h1 class="section">
-    <a href="{%url story_archive %}?order=order_date">Latest</a>
+    <a href="{%url story_archive %}?order=order_date">Latest Short Stories</a>
     <a style="float:right;" href="{%url latest_feed %}">
       <img src="/media/img/rss-24.png" alt="rss" />
     </a>
   </h1>
-  {% with latest as story_list %}
+  {% with latest_stories as story_list %}
+  {% include "stories/story_list.html" %}
+  {% endwith %}
+
+  <h1 class="section">
+    <a href="{%url view_genre poetry_genre.id %}">Latest Poetry</a>
+    <a style="float:right;" href="{%url genre_feed poetry_genre.id%}">
+      <img src="/media/img/rss-24.png" alt="rss" />
+    </a>
+  </h1>
+  {% with latest_poetry as story_list %}
   {% include "stories/story_list.html" %}
   {% endwith %}
 </div>
@@ -55,24 +65,7 @@ $(document).ready(
 </div>
 
 <div id="right" class="home_column">
-
-<h1 class="section">Subscribe</h1>
-<div class="story">
-
-    <h2 class="title">
-    <a href="{%url latest_feed %}">
-    <img src="/media/img/rss-24.png" alt="rss" /> Latest Stories
-    </a>
-    </h2>
-    
-    <h2 class="title">
-    <a href="{%url top_rated_feed %}">
-    <img src="/media/img/rss-24.png" alt="rss" /> Top Rated Stories
-    </a>
-    </h2>
-    
-</div>
-
+	
 {% if shortys_story %}
 <h1 class="section"><a href="{% url view_author shortys_story.author.id%}">Shorty's R0.02</a></h1>
   {% with shortys_story as story %}

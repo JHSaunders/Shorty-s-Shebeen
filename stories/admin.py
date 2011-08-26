@@ -8,7 +8,7 @@ class StoryAdmin(admin.ModelAdmin):
     search_fields = ['title','author__last_name','author__username','author__first_name']
 
     
-admin.site.register(Story, StoryAdmin)
+admin.site.register(Story)
 admin.site.register(Genre)
 
 class CompetitionAdmin(admin.ModelAdmin):

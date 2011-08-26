@@ -24,16 +24,17 @@ from forms import *
 # story with one vote of 5/5 wont automatically go to the top
 # May want to put in some sort of exponential decay
 rating_formula = '((100/%s*rating_score/(rating_votes+%s))+10)/2'
-num_stories_in_list = 10
-num_random_stories = num_stories_in_list/2
+num_stories_in_list = 7
+num_random_stories = num_stories_in_list
 
 def test(req):
     return HttpResponse("Hello world")
 
 def home(req):
     context = {}
+    context["latest_stories"] = Story.published_stories.exclude(genre__name="Poetry").order_by('-date_published')[:num_stories_in_list]    
+    context["latest_poetry"] = Story.published_stories.filter(genre__name="Poetry").order_by('-date_published')[:num_stories_in_list]    
     
-    context["latest"] = Story.published_stories.order_by('-date_published')[:num_stories_in_list]    
     context["top_rated"] = Story.published_stories.extra(select={'rating_scorex': 
             rating_formula % 
             (Story.rating.range, Story.rating.weight)}).order_by('-rating_scorex')[:num_stories_in_list]
@@ -60,7 +61,7 @@ def home(req):
         context["latest_competitions"] = None
 
     context["genres"] = Genre.objects.all()
-    
+    context["poetry_genre"]=Genre.objects.get(name="Poetry")
     return direct_to_template(req,"stories/home.html",context)
 
 def random_story(req):
